@@ -32,6 +32,9 @@ export const SlugField = (fromField: string): TextField => ({
 
   validate: (value) => {
     if (!value) return true;
-    return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) || "Invalid slug format.";
+    return (
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ||
+      "invalid slug format - format slug invalide"
+    );
   },
 });

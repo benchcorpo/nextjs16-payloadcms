@@ -1,12 +1,13 @@
 import { CollectionConfig } from "payload";
 
 import i18n from "../i18n.json";
+import { SlugField } from "../fields/SlugField";
 
-export const TeamGroups: CollectionConfig = {
-  slug: "team-groups",
+export const BlogAuthors: CollectionConfig = {
+  slug: "blog-authors",
   labels: {
-    singular: i18n.collections.teamGroups.labels.singular,
-    plural: i18n.collections.teamGroups.labels.plural,
+    singular: i18n.collections.blogAuthors.labels.singular,
+    plural: i18n.collections.blogAuthors.labels.plural,
   },
   admin: {
     useAsTitle: "name",
@@ -17,34 +18,36 @@ export const TeamGroups: CollectionConfig = {
       type: "tabs",
       tabs: [
         {
-          label: i18n.collections.teamGroups.tabs.content,
+          label: i18n.collections.blogAuthors.tabs.content,
           fields: [
             {
               name: "name",
               type: "text",
-              label: i18n.collections.teamGroups.fields.name,
+              label: i18n.collections.blogAuthors.fields.name,
               required: true,
+              unique: true,
             },
             {
               name: "description",
               type: "textarea",
-              label: i18n.collections.teamGroups.fields.description,
+              label: i18n.collections.blogAuthors.fields.description,
             },
             {
               name: "icon",
               type: "upload",
-              label: i18n.collections.teamGroups.fields.icon,
+              label: i18n.collections.blogAuthors.fields.icon,
               relationTo: "media",
             },
           ],
         },
         {
-          label: i18n.collections.teamGroups.tabs.advanced,
+          label: i18n.collections.blogAuthors.tabs.advanced,
           fields: [
+            SlugField("name"),
             {
               name: "order",
               type: "number",
-              label: i18n.collections.teamGroups.fields.order,
+              label: i18n.collections.blogAuthors.fields.order,
               defaultValue: 0,
               required: true,
             },

@@ -69,16 +69,16 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    events: Event;
-    'faq-items': FaqItem;
-    'faq-groups': FaqGroup;
-    'job-offers': JobOffer;
-    galleries: Gallery;
-    'team-items': TeamItem;
     'team-groups': TeamGroup;
+    'team-items': TeamItem;
+    events: Event;
+    'job-offers': JobOffer;
     testimonials: Testimonial;
     'press-releases': PressRelease;
+    'faq-groups': FaqGroup;
+    'faq-items': FaqItem;
     'blog-categories': BlogCategory;
+    'blog-authors': BlogAuthor;
     'blog-posts': BlogPost;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -89,16 +89,16 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    events: EventsSelect<false> | EventsSelect<true>;
-    'faq-items': FaqItemsSelect<false> | FaqItemsSelect<true>;
-    'faq-groups': FaqGroupsSelect<false> | FaqGroupsSelect<true>;
-    'job-offers': JobOffersSelect<false> | JobOffersSelect<true>;
-    galleries: GalleriesSelect<false> | GalleriesSelect<true>;
-    'team-items': TeamItemsSelect<false> | TeamItemsSelect<true>;
     'team-groups': TeamGroupsSelect<false> | TeamGroupsSelect<true>;
+    'team-items': TeamItemsSelect<false> | TeamItemsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    'job-offers': JobOffersSelect<false> | JobOffersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'press-releases': PressReleasesSelect<false> | PressReleasesSelect<true>;
+    'faq-groups': FaqGroupsSelect<false> | FaqGroupsSelect<true>;
+    'faq-items': FaqItemsSelect<false> | FaqItemsSelect<true>;
     'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
+    'blog-authors': BlogAuthorsSelect<false> | BlogAuthorsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -182,6 +182,54 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-groups".
+ */
+export interface TeamGroup {
+  id: number;
+  name: string;
+  description?: string | null;
+  icon?: (number | null) | Media;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-items".
+ */
+export interface TeamItem {
+  id: number;
+  category: number | TeamGroup;
+  name: string;
+  role: string;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  photo?: (number | null) | Media;
+  email?: string | null;
+  phone?: string | null;
+  linkedin?: string | null;
+  twitter?: string | null;
+  facebook?: string | null;
+  instagram?: string | null;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "events".
  */
 export interface Event {
@@ -208,46 +256,6 @@ export interface Event {
   endDate?: string | null;
   virtualLink?: string | null;
   registrationLink?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-items".
- */
-export interface FaqItem {
-  id: number;
-  category: number | FaqGroup;
-  question: string;
-  answer: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-groups".
- */
-export interface FaqGroup {
-  id: number;
-  name: string;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -297,72 +305,6 @@ export interface JobOffer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "galleries".
- */
-export interface Gallery {
-  id: number;
-  title: string;
-  description?: string | null;
-  images: {
-    image: number | Media;
-    caption?: string | null;
-    id?: string | null;
-  }[];
-  slug: string;
-  date: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-items".
- */
-export interface TeamItem {
-  id: number;
-  category: number | TeamGroup;
-  name: string;
-  role: string;
-  bio?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  photo?: (number | null) | Media;
-  email?: string | null;
-  phone?: string | null;
-  linkedin?: string | null;
-  twitter?: string | null;
-  facebook?: string | null;
-  instagram?: string | null;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-groups".
- */
-export interface TeamGroup {
-  id: number;
-  name: string;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
  */
 export interface Testimonial {
@@ -406,9 +348,63 @@ export interface PressRelease {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq-groups".
+ */
+export interface FaqGroup {
+  id: number;
+  name: string;
+  description?: string | null;
+  icon?: (number | null) | Media;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq-items".
+ */
+export interface FaqItem {
+  id: number;
+  category: number | FaqGroup;
+  question: string;
+  answer: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-categories".
  */
 export interface BlogCategory {
+  id: number;
+  name: string;
+  description?: string | null;
+  icon?: (number | null) | Media;
+  slug: string;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-authors".
+ */
+export interface BlogAuthor {
   id: number;
   name: string;
   description?: string | null;
@@ -443,7 +439,7 @@ export interface BlogPost {
     };
     [k: string]: unknown;
   };
-  author: number | TeamItem;
+  author: number | BlogAuthor;
   tags?:
     | {
         tag?: string | null;
@@ -490,32 +486,20 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'events';
-        value: number | Event;
-      } | null)
-    | ({
-        relationTo: 'faq-items';
-        value: number | FaqItem;
-      } | null)
-    | ({
-        relationTo: 'faq-groups';
-        value: number | FaqGroup;
-      } | null)
-    | ({
-        relationTo: 'job-offers';
-        value: number | JobOffer;
-      } | null)
-    | ({
-        relationTo: 'galleries';
-        value: number | Gallery;
+        relationTo: 'team-groups';
+        value: number | TeamGroup;
       } | null)
     | ({
         relationTo: 'team-items';
         value: number | TeamItem;
       } | null)
     | ({
-        relationTo: 'team-groups';
-        value: number | TeamGroup;
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'job-offers';
+        value: number | JobOffer;
       } | null)
     | ({
         relationTo: 'testimonials';
@@ -526,8 +510,20 @@ export interface PayloadLockedDocument {
         value: number | PressRelease;
       } | null)
     | ({
+        relationTo: 'faq-groups';
+        value: number | FaqGroup;
+      } | null)
+    | ({
+        relationTo: 'faq-items';
+        value: number | FaqItem;
+      } | null)
+    | ({
         relationTo: 'blog-categories';
         value: number | BlogCategory;
+      } | null)
+    | ({
+        relationTo: 'blog-authors';
+        value: number | BlogAuthor;
       } | null)
     | ({
         relationTo: 'blog-posts';
@@ -617,75 +613,13 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events_select".
+ * via the `definition` "team-groups_select".
  */
-export interface EventsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  location?: T;
-  image?: T;
-  date?: T;
-  endDate?: T;
-  virtualLink?: T;
-  registrationLink?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-items_select".
- */
-export interface FaqItemsSelect<T extends boolean = true> {
-  category?: T;
-  question?: T;
-  answer?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-groups_select".
- */
-export interface FaqGroupsSelect<T extends boolean = true> {
+export interface TeamGroupsSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   icon?: T;
   order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "job-offers_select".
- */
-export interface JobOffersSelect<T extends boolean = true> {
-  title?: T;
-  location?: T;
-  description?: T;
-  requirements?: T;
-  applicationLink?: T;
-  active?: T;
-  postedDate?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "galleries_select".
- */
-export interface GalleriesSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  images?:
-    | T
-    | {
-        image?: T;
-        caption?: T;
-        id?: T;
-      };
-  slug?: T;
-  date?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -711,13 +645,32 @@ export interface TeamItemsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-groups_select".
+ * via the `definition` "events_select".
  */
-export interface TeamGroupsSelect<T extends boolean = true> {
-  name?: T;
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
   description?: T;
-  icon?: T;
-  order?: T;
+  location?: T;
+  image?: T;
+  date?: T;
+  endDate?: T;
+  virtualLink?: T;
+  registrationLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-offers_select".
+ */
+export interface JobOffersSelect<T extends boolean = true> {
+  title?: T;
+  location?: T;
+  description?: T;
+  requirements?: T;
+  applicationLink?: T;
+  active?: T;
+  postedDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -750,9 +703,46 @@ export interface PressReleasesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq-groups_select".
+ */
+export interface FaqGroupsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq-items_select".
+ */
+export interface FaqItemsSelect<T extends boolean = true> {
+  category?: T;
+  question?: T;
+  answer?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-categories_select".
  */
 export interface BlogCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  slug?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-authors_select".
+ */
+export interface BlogAuthorsSelect<T extends boolean = true> {
   name?: T;
   description?: T;
   icon?: T;
