@@ -1,5 +1,6 @@
 import { CompanyInfo } from "./globals/CompanyInfo";
 import { OpeningHours } from "./globals/OpeningHours";
+import { Menu } from "./globals/Menu";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Events } from "./collections/Events";
@@ -17,6 +18,7 @@ import { BlogCategories } from "./collections/BlogCategories";
 export const globals = [
     CompanyInfo,
     OpeningHours,
+    Menu,
 ];
 
 export const collections = [

@@ -111,10 +111,12 @@ export interface Config {
   globals: {
     'company-info': CompanyInfo;
     'opening-hours': OpeningHour;
+    menu: Menu;
   };
   globalsSelect: {
     'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
     'opening-hours': OpeningHoursSelect<false> | OpeningHoursSelect<true>;
+    menu: MenuSelect<false> | MenuSelect<true>;
   };
   locale: null;
   user: User & {
@@ -891,6 +893,33 @@ export interface OpeningHour {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu".
+ */
+export interface Menu {
+  id: number;
+  pdf?: (number | null) | Media;
+  categories?:
+    | {
+        name: string;
+        dishes?:
+          | {
+              name: string;
+              description?: string | null;
+              price?: number | null;
+              image?: (number | null) | Media;
+              dietary?: string | null;
+              spicyLevel?: ('none' | 'mild' | 'medium' | 'hot' | 'extra-hot') | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "company-info_select".
  */
 export interface CompanyInfoSelect<T extends boolean = true> {
@@ -972,6 +1001,33 @@ export interface OpeningHoursSelect<T extends boolean = true> {
         open?: T;
         close?: T;
         isOpen?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu_select".
+ */
+export interface MenuSelect<T extends boolean = true> {
+  pdf?: T;
+  categories?:
+    | T
+    | {
+        name?: T;
+        dishes?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              price?: T;
+              image?: T;
+              dietary?: T;
+              spicyLevel?: T;
+              id?: T;
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

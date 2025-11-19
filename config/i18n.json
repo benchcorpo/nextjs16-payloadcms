@@ -103,6 +103,84 @@
           "fr": "Ouvert"
         }
       }
+    },
+    "menu": {
+      "label": {
+        "en": "Restaurant Menu",
+        "fr": "Menu du restaurant"
+      },
+      "fields": {
+        "pdf": {
+          "en": "PDF Menu",
+          "fr": "Menu PDF"
+        },
+        "categories": {
+          "en": "Categories",
+          "fr": "Catégories"
+        },
+        "category": {
+          "en": "Category",
+          "fr": "Catégorie"
+        },
+        "categoryName": {
+          "en": "Category Name",
+          "fr": "Nom de la catégorie"
+        },
+        "dishes": {
+          "en": "Dishes",
+          "fr": "Plats"
+        },
+        "dish": {
+          "en": "Dish",
+          "fr": "Plat"
+        },
+        "name": {
+          "en": "Name",
+          "fr": "Nom"
+        },
+        "description": {
+          "en": "Description",
+          "fr": "Description"
+        },
+        "price": {
+          "en": "Price",
+          "fr": "Prix"
+        },
+        "image": {
+          "en": "Image",
+          "fr": "Image"
+        },
+        "dietary": {
+          "en": "Dietary Info",
+          "fr": "Infos diététiques"
+        },
+        "spicy": {
+          "en": "Spicy Level",
+          "fr": "Niveau d'épices"
+        },
+        "options": {
+          "none": {
+            "en": "None",
+            "fr": "Aucun"
+          },
+          "mild": {
+            "en": "Mild",
+            "fr": "Doux"
+          },
+          "medium": {
+            "en": "Medium",
+            "fr": "Moyen"
+          },
+          "hot": {
+            "en": "Hot",
+            "fr": "Épicé"
+          },
+          "extraHot": {
+            "en": "Extra Hot",
+            "fr": "Très épicé"
+          }
+        }
+      }
     }
   },
   "collections": {
