@@ -108,8 +108,14 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'company-info': CompanyInfo;
+    'opening-hours': OpeningHour;
+  };
+  globalsSelect: {
+    'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
+    'opening-hours': OpeningHoursSelect<false> | OpeningHoursSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -814,6 +820,162 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info".
+ */
+export interface CompanyInfo {
+  id: number;
+  description?: string | null;
+  contact?: {
+    email?: string | null;
+    phone?: string | null;
+    address?: string | null;
+  };
+  socials?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    linkedin?: string | null;
+    twitter?: string | null;
+  };
+  settings?: {
+    googleAnalyticsId?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opening-hours".
+ */
+export interface OpeningHour {
+  id: number;
+  monday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  tuesday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  wednesday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  thursday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  friday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  saturday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  sunday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info_select".
+ */
+export interface CompanyInfoSelect<T extends boolean = true> {
+  description?: T;
+  contact?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        address?: T;
+      };
+  socials?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        linkedin?: T;
+        twitter?: T;
+      };
+  settings?:
+    | T
+    | {
+        googleAnalyticsId?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opening-hours_select".
+ */
+export interface OpeningHoursSelect<T extends boolean = true> {
+  monday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  tuesday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  wednesday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  thursday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  friday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  saturday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  sunday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

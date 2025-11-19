@@ -11,6 +11,8 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
+import { CompanyInfo } from "./globals/CompanyInfo";
+import { OpeningHours } from "./globals/OpeningHours";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Events } from "./collections/Events";
@@ -131,6 +133,7 @@ export default buildConfig({
     supportedLanguages: { en, fr },
     fallbackLanguage: "fr",
   },
+  globals: [CompanyInfo, OpeningHours],
   collections: [
     Users,
     Media,
