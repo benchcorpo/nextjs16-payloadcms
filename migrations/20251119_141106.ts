@@ -137,28 +137,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
-  CREATE TABLE "blog_categories" (
-  	"id" serial PRIMARY KEY NOT NULL,
-  	"name" varchar NOT NULL,
-  	"description" varchar,
-  	"icon_id" integer,
-  	"slug" varchar NOT NULL,
-  	"order" numeric DEFAULT 0 NOT NULL,
-  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-  );
-  
-  CREATE TABLE "blog_authors" (
-  	"id" serial PRIMARY KEY NOT NULL,
-  	"name" varchar NOT NULL,
-  	"description" varchar,
-  	"icon_id" integer,
-  	"slug" varchar NOT NULL,
-  	"order" numeric DEFAULT 0 NOT NULL,
-  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-  );
-  
   CREATE TABLE "blog_posts_tags" (
   	"_order" integer NOT NULL,
   	"_parent_id" integer NOT NULL,
@@ -178,6 +156,28 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"meta_description" varchar,
   	"slug" varchar NOT NULL,
   	"published_date" timestamp(3) with time zone NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "blog_authors" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar NOT NULL,
+  	"description" varchar,
+  	"icon_id" integer,
+  	"slug" varchar NOT NULL,
+  	"order" numeric DEFAULT 0 NOT NULL,
+  	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+  	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+  );
+  
+  CREATE TABLE "blog_categories" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"name" varchar NOT NULL,
+  	"description" varchar,
+  	"icon_id" integer,
+  	"slug" varchar NOT NULL,
+  	"order" numeric DEFAULT 0 NOT NULL,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
@@ -210,9 +210,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"press_releases_id" integer,
   	"faq_groups_id" integer,
   	"faq_items_id" integer,
-  	"blog_categories_id" integer,
+  	"blog_posts_id" integer,
   	"blog_authors_id" integer,
-  	"blog_posts_id" integer
+  	"blog_categories_id" integer
   );
   
   CREATE TABLE "payload_preferences" (
@@ -239,6 +239,48 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
+  CREATE TABLE "company_info" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"description" varchar,
+  	"contact_email" varchar,
+  	"contact_phone" varchar,
+  	"contact_address" varchar,
+  	"socials_facebook" varchar,
+  	"socials_instagram" varchar,
+  	"socials_linkedin" varchar,
+  	"socials_twitter" varchar,
+  	"settings_google_analytics_id" varchar,
+  	"updated_at" timestamp(3) with time zone,
+  	"created_at" timestamp(3) with time zone
+  );
+  
+  CREATE TABLE "opening_hours" (
+  	"id" serial PRIMARY KEY NOT NULL,
+  	"monday_open" varchar,
+  	"monday_close" varchar,
+  	"monday_is_open" boolean DEFAULT true,
+  	"tuesday_open" varchar,
+  	"tuesday_close" varchar,
+  	"tuesday_is_open" boolean DEFAULT true,
+  	"wednesday_open" varchar,
+  	"wednesday_close" varchar,
+  	"wednesday_is_open" boolean DEFAULT true,
+  	"thursday_open" varchar,
+  	"thursday_close" varchar,
+  	"thursday_is_open" boolean DEFAULT true,
+  	"friday_open" varchar,
+  	"friday_close" varchar,
+  	"friday_is_open" boolean DEFAULT true,
+  	"saturday_open" varchar,
+  	"saturday_close" varchar,
+  	"saturday_is_open" boolean DEFAULT true,
+  	"sunday_open" varchar,
+  	"sunday_close" varchar,
+  	"sunday_is_open" boolean DEFAULT true,
+  	"updated_at" timestamp(3) with time zone,
+  	"created_at" timestamp(3) with time zone
+  );
+  
   ALTER TABLE "users_sessions" ADD CONSTRAINT "users_sessions_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "team_groups" ADD CONSTRAINT "team_groups_icon_id_media_id_fk" FOREIGN KEY ("icon_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "team_items" ADD CONSTRAINT "team_items_category_id_team_groups_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."team_groups"("id") ON DELETE set null ON UPDATE no action;
@@ -247,12 +289,12 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "testimonials" ADD CONSTRAINT "testimonials_photo_id_media_id_fk" FOREIGN KEY ("photo_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "faq_groups" ADD CONSTRAINT "faq_groups_icon_id_media_id_fk" FOREIGN KEY ("icon_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "faq_items" ADD CONSTRAINT "faq_items_category_id_faq_groups_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."faq_groups"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "blog_categories" ADD CONSTRAINT "blog_categories_icon_id_media_id_fk" FOREIGN KEY ("icon_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
-  ALTER TABLE "blog_authors" ADD CONSTRAINT "blog_authors_icon_id_media_id_fk" FOREIGN KEY ("icon_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "blog_posts_tags" ADD CONSTRAINT "blog_posts_tags_parent_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "public"."blog_posts"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "blog_posts" ADD CONSTRAINT "blog_posts_category_id_blog_categories_id_fk" FOREIGN KEY ("category_id") REFERENCES "public"."blog_categories"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "blog_posts" ADD CONSTRAINT "blog_posts_featured_image_id_media_id_fk" FOREIGN KEY ("featured_image_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "blog_posts" ADD CONSTRAINT "blog_posts_author_id_blog_authors_id_fk" FOREIGN KEY ("author_id") REFERENCES "public"."blog_authors"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "blog_authors" ADD CONSTRAINT "blog_authors_icon_id_media_id_fk" FOREIGN KEY ("icon_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
+  ALTER TABLE "blog_categories" ADD CONSTRAINT "blog_categories_icon_id_media_id_fk" FOREIGN KEY ("icon_id") REFERENCES "public"."media"("id") ON DELETE set null ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_locked_documents"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_media_fk" FOREIGN KEY ("media_id") REFERENCES "public"."media"("id") ON DELETE cascade ON UPDATE no action;
@@ -264,9 +306,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_press_releases_fk" FOREIGN KEY ("press_releases_id") REFERENCES "public"."press_releases"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_faq_groups_fk" FOREIGN KEY ("faq_groups_id") REFERENCES "public"."faq_groups"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_faq_items_fk" FOREIGN KEY ("faq_items_id") REFERENCES "public"."faq_items"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
-  ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_blog_authors_fk" FOREIGN KEY ("blog_authors_id") REFERENCES "public"."blog_authors"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_blog_posts_fk" FOREIGN KEY ("blog_posts_id") REFERENCES "public"."blog_posts"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_blog_authors_fk" FOREIGN KEY ("blog_authors_id") REFERENCES "public"."blog_authors"("id") ON DELETE cascade ON UPDATE no action;
+  ALTER TABLE "payload_locked_documents_rels" ADD CONSTRAINT "payload_locked_documents_rels_blog_categories_fk" FOREIGN KEY ("blog_categories_id") REFERENCES "public"."blog_categories"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_parent_fk" FOREIGN KEY ("parent_id") REFERENCES "public"."payload_preferences"("id") ON DELETE cascade ON UPDATE no action;
   ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_users_fk" FOREIGN KEY ("users_id") REFERENCES "public"."users"("id") ON DELETE cascade ON UPDATE no action;
   CREATE INDEX "users_sessions_order_idx" ON "users_sessions" USING btree ("_order");
@@ -300,16 +342,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "faq_items_category_idx" ON "faq_items" USING btree ("category_id");
   CREATE INDEX "faq_items_updated_at_idx" ON "faq_items" USING btree ("updated_at");
   CREATE INDEX "faq_items_created_at_idx" ON "faq_items" USING btree ("created_at");
-  CREATE UNIQUE INDEX "blog_categories_name_idx" ON "blog_categories" USING btree ("name");
-  CREATE INDEX "blog_categories_icon_idx" ON "blog_categories" USING btree ("icon_id");
-  CREATE UNIQUE INDEX "blog_categories_slug_idx" ON "blog_categories" USING btree ("slug");
-  CREATE INDEX "blog_categories_updated_at_idx" ON "blog_categories" USING btree ("updated_at");
-  CREATE INDEX "blog_categories_created_at_idx" ON "blog_categories" USING btree ("created_at");
-  CREATE UNIQUE INDEX "blog_authors_name_idx" ON "blog_authors" USING btree ("name");
-  CREATE INDEX "blog_authors_icon_idx" ON "blog_authors" USING btree ("icon_id");
-  CREATE UNIQUE INDEX "blog_authors_slug_idx" ON "blog_authors" USING btree ("slug");
-  CREATE INDEX "blog_authors_updated_at_idx" ON "blog_authors" USING btree ("updated_at");
-  CREATE INDEX "blog_authors_created_at_idx" ON "blog_authors" USING btree ("created_at");
   CREATE INDEX "blog_posts_tags_order_idx" ON "blog_posts_tags" USING btree ("_order");
   CREATE INDEX "blog_posts_tags_parent_id_idx" ON "blog_posts_tags" USING btree ("_parent_id");
   CREATE INDEX "blog_posts_category_idx" ON "blog_posts" USING btree ("category_id");
@@ -318,6 +350,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE UNIQUE INDEX "blog_posts_slug_idx" ON "blog_posts" USING btree ("slug");
   CREATE INDEX "blog_posts_updated_at_idx" ON "blog_posts" USING btree ("updated_at");
   CREATE INDEX "blog_posts_created_at_idx" ON "blog_posts" USING btree ("created_at");
+  CREATE UNIQUE INDEX "blog_authors_name_idx" ON "blog_authors" USING btree ("name");
+  CREATE INDEX "blog_authors_icon_idx" ON "blog_authors" USING btree ("icon_id");
+  CREATE UNIQUE INDEX "blog_authors_slug_idx" ON "blog_authors" USING btree ("slug");
+  CREATE INDEX "blog_authors_updated_at_idx" ON "blog_authors" USING btree ("updated_at");
+  CREATE INDEX "blog_authors_created_at_idx" ON "blog_authors" USING btree ("created_at");
+  CREATE UNIQUE INDEX "blog_categories_name_idx" ON "blog_categories" USING btree ("name");
+  CREATE INDEX "blog_categories_icon_idx" ON "blog_categories" USING btree ("icon_id");
+  CREATE UNIQUE INDEX "blog_categories_slug_idx" ON "blog_categories" USING btree ("slug");
+  CREATE INDEX "blog_categories_updated_at_idx" ON "blog_categories" USING btree ("updated_at");
+  CREATE INDEX "blog_categories_created_at_idx" ON "blog_categories" USING btree ("created_at");
   CREATE UNIQUE INDEX "payload_kv_key_idx" ON "payload_kv" USING btree ("key");
   CREATE INDEX "payload_locked_documents_global_slug_idx" ON "payload_locked_documents" USING btree ("global_slug");
   CREATE INDEX "payload_locked_documents_updated_at_idx" ON "payload_locked_documents" USING btree ("updated_at");
@@ -335,9 +377,9 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "payload_locked_documents_rels_press_releases_id_idx" ON "payload_locked_documents_rels" USING btree ("press_releases_id");
   CREATE INDEX "payload_locked_documents_rels_faq_groups_id_idx" ON "payload_locked_documents_rels" USING btree ("faq_groups_id");
   CREATE INDEX "payload_locked_documents_rels_faq_items_id_idx" ON "payload_locked_documents_rels" USING btree ("faq_items_id");
-  CREATE INDEX "payload_locked_documents_rels_blog_categories_id_idx" ON "payload_locked_documents_rels" USING btree ("blog_categories_id");
-  CREATE INDEX "payload_locked_documents_rels_blog_authors_id_idx" ON "payload_locked_documents_rels" USING btree ("blog_authors_id");
   CREATE INDEX "payload_locked_documents_rels_blog_posts_id_idx" ON "payload_locked_documents_rels" USING btree ("blog_posts_id");
+  CREATE INDEX "payload_locked_documents_rels_blog_authors_id_idx" ON "payload_locked_documents_rels" USING btree ("blog_authors_id");
+  CREATE INDEX "payload_locked_documents_rels_blog_categories_id_idx" ON "payload_locked_documents_rels" USING btree ("blog_categories_id");
   CREATE INDEX "payload_preferences_key_idx" ON "payload_preferences" USING btree ("key");
   CREATE INDEX "payload_preferences_updated_at_idx" ON "payload_preferences" USING btree ("updated_at");
   CREATE INDEX "payload_preferences_created_at_idx" ON "payload_preferences" USING btree ("created_at");
@@ -362,14 +404,16 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   DROP TABLE "press_releases" CASCADE;
   DROP TABLE "faq_groups" CASCADE;
   DROP TABLE "faq_items" CASCADE;
-  DROP TABLE "blog_categories" CASCADE;
-  DROP TABLE "blog_authors" CASCADE;
   DROP TABLE "blog_posts_tags" CASCADE;
   DROP TABLE "blog_posts" CASCADE;
+  DROP TABLE "blog_authors" CASCADE;
+  DROP TABLE "blog_categories" CASCADE;
   DROP TABLE "payload_kv" CASCADE;
   DROP TABLE "payload_locked_documents" CASCADE;
   DROP TABLE "payload_locked_documents_rels" CASCADE;
   DROP TABLE "payload_preferences" CASCADE;
   DROP TABLE "payload_preferences_rels" CASCADE;
-  DROP TABLE "payload_migrations" CASCADE;`)
+  DROP TABLE "payload_migrations" CASCADE;
+  DROP TABLE "company_info" CASCADE;
+  DROP TABLE "opening_hours" CASCADE;`)
 }

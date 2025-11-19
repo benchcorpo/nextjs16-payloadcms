@@ -77,9 +77,9 @@ export interface Config {
     'press-releases': PressRelease;
     'faq-groups': FaqGroup;
     'faq-items': FaqItem;
-    'blog-categories': BlogCategory;
-    'blog-authors': BlogAuthor;
     'blog-posts': BlogPost;
+    'blog-authors': BlogAuthor;
+    'blog-categories': BlogCategory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -97,9 +97,9 @@ export interface Config {
     'press-releases': PressReleasesSelect<false> | PressReleasesSelect<true>;
     'faq-groups': FaqGroupsSelect<false> | FaqGroupsSelect<true>;
     'faq-items': FaqItemsSelect<false> | FaqItemsSelect<true>;
-    'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
-    'blog-authors': BlogAuthorsSelect<false> | BlogAuthorsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    'blog-authors': BlogAuthorsSelect<false> | BlogAuthorsSelect<true>;
+    'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -394,34 +394,6 @@ export interface FaqItem {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-categories".
- */
-export interface BlogCategory {
-  id: number;
-  name: string;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  slug: string;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-authors".
- */
-export interface BlogAuthor {
-  id: number;
-  name: string;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  slug: string;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts".
  */
 export interface BlogPost {
@@ -456,6 +428,34 @@ export interface BlogPost {
   metaDescription?: string | null;
   slug: string;
   publishedDate: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-categories".
+ */
+export interface BlogCategory {
+  id: number;
+  name: string;
+  description?: string | null;
+  icon?: (number | null) | Media;
+  slug: string;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-authors".
+ */
+export interface BlogAuthor {
+  id: number;
+  name: string;
+  description?: string | null;
+  icon?: (number | null) | Media;
+  slug: string;
+  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -524,16 +524,16 @@ export interface PayloadLockedDocument {
         value: number | FaqItem;
       } | null)
     | ({
-        relationTo: 'blog-categories';
-        value: number | BlogCategory;
+        relationTo: 'blog-posts';
+        value: number | BlogPost;
       } | null)
     | ({
         relationTo: 'blog-authors';
         value: number | BlogAuthor;
       } | null)
     | ({
-        relationTo: 'blog-posts';
-        value: number | BlogPost;
+        relationTo: 'blog-categories';
+        value: number | BlogCategory;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -733,32 +733,6 @@ export interface FaqItemsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-categories_select".
- */
-export interface BlogCategoriesSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  icon?: T;
-  slug?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-authors_select".
- */
-export interface BlogAuthorsSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  icon?: T;
-  slug?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts_select".
  */
 export interface BlogPostsSelect<T extends boolean = true> {
@@ -778,6 +752,32 @@ export interface BlogPostsSelect<T extends boolean = true> {
   metaDescription?: T;
   slug?: T;
   publishedDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-authors_select".
+ */
+export interface BlogAuthorsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  slug?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-categories_select".
+ */
+export interface BlogCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  slug?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

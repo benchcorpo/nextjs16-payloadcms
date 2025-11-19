@@ -11,21 +11,7 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
-import { CompanyInfo } from "./globals/CompanyInfo";
-import { OpeningHours } from "./globals/OpeningHours";
-import { Users } from "./collections/Users";
-import { Media } from "./collections/Media";
-import { Events } from "./collections/Events";
-import { FAQItems } from "./collections/FAQItems";
-import { FAQGroups } from "./collections/FAQGroups";
-import { JobOffers } from "./collections/JobOffers";
-import { TeamItems } from "./collections/TeamItems";
-import { TeamGroups } from "./collections/TeamGroups";
-import { Testimonials } from "./collections/Testimonials";
-import { PressReleases } from "./collections/PressReleases";
-import { BlogPosts } from "./collections/BlogPosts";
-import { BlogAuthors } from "./collections/BlogAuthors";
-import { BlogCategories } from "./collections/BlogCategories";
+import { globals, collections } from "@/config"
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -120,11 +106,11 @@ export default buildConfig({
       connectionString: DATABASE_URI,
     },
     push: false,
-    migrationDir: "./config/migrations",
+    migrationDir: "./migrations",
   }),
   email: getEmailConfig(),
   admin: {
-    user: Users.slug,
+    user: "users",
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -133,23 +119,9 @@ export default buildConfig({
     supportedLanguages: { en, fr },
     fallbackLanguage: "fr",
   },
-  globals: [CompanyInfo, OpeningHours],
-  collections: [
-    Users,
-    Media,
-    TeamGroups,
-    TeamItems,
-    Events,
-    JobOffers,
-    Testimonials,
-    PressReleases,
-    FAQGroups,
-    FAQItems,
-    BlogCategories,
-    BlogAuthors,
-    BlogPosts,
-  ],
   editor: lexicalEditor(),
+  globals,
+  collections,
   sharp,
   plugins,
 });
