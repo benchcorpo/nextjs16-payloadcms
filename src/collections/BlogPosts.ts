@@ -1,14 +1,13 @@
 import { CollectionConfig } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 import { SlugField } from "../fields/SlugField";
 
 export const BlogPosts: CollectionConfig = {
   slug: "blog-posts",
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => !!user,
   },
-  endpoints: false,
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "author", "publishedDate"],

@@ -1,13 +1,12 @@
 import { CollectionConfig } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 
 export const PressReleases: CollectionConfig = {
   slug: "press-releases",
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => !!user,
   },
-  endpoints: false,
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "publishedDate"],

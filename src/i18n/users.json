@@ -1,0 +1,12 @@
+{
+    "labels": {
+        "singular": {
+            "en": "User",
+            "fr": "Utilisateur"
+        },
+        "plural": {
+            "en": "Users",
+            "fr": "Utilisateurs"
+        }
+    }
+}

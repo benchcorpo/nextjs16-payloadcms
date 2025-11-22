@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 
 export const ContactEmails: CollectionConfig = {
     slug: "contact-emails",
@@ -10,7 +10,6 @@ export const ContactEmails: CollectionConfig = {
         update: () => false, // No updates allowed
         delete: ({ req: { user } }) => !!user, // Only admins can delete
     },
-    endpoints: false,
     admin: {
         useAsTitle: "name",
         defaultColumns: ["name", "email", "subject", "submittedAt"],

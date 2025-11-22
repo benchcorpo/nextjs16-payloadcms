@@ -1,0 +1,18 @@
+{
+    "labels": {
+        "singular": {
+            "en": "Media",
+            "fr": "Média"
+        },
+        "plural": {
+            "en": "Media",
+            "fr": "Médias"
+        }
+    },
+    "fields": {
+        "alt": {
+            "en": "Alt Text",
+            "fr": "Texte alternatif"
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 
 export const Users: CollectionConfig = {
   slug: "users",

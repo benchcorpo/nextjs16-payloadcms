@@ -69,18 +69,17 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    'team-groups': TeamGroup;
-    'team-items': TeamItem;
+    team: Team;
     events: Event;
     'job-offers': JobOffer;
     testimonials: Testimonial;
     'press-releases': PressRelease;
-    'faq-groups': FaqGroup;
-    'faq-items': FaqItem;
+    faq: Faq;
     'blog-posts': BlogPost;
     'blog-authors': BlogAuthor;
     'blog-categories': BlogCategory;
     'contact-emails': ContactEmail;
+    'restaurant-menu': RestaurantMenu;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,18 +89,17 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    'team-groups': TeamGroupsSelect<false> | TeamGroupsSelect<true>;
-    'team-items': TeamItemsSelect<false> | TeamItemsSelect<true>;
+    team: TeamSelect<false> | TeamSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     'job-offers': JobOffersSelect<false> | JobOffersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'press-releases': PressReleasesSelect<false> | PressReleasesSelect<true>;
-    'faq-groups': FaqGroupsSelect<false> | FaqGroupsSelect<true>;
-    'faq-items': FaqItemsSelect<false> | FaqItemsSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'blog-authors': BlogAuthorsSelect<false> | BlogAuthorsSelect<true>;
     'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
     'contact-emails': ContactEmailsSelect<false> | ContactEmailsSelect<true>;
+    'restaurant-menu': RestaurantMenuSelect<false> | RestaurantMenuSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -113,12 +111,10 @@ export interface Config {
   globals: {
     'company-info': CompanyInfo;
     'opening-hours': OpeningHour;
-    menu: Menu;
   };
   globalsSelect: {
     'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
     'opening-hours': OpeningHoursSelect<false> | OpeningHoursSelect<true>;
-    menu: MenuSelect<false> | MenuSelect<true>;
   };
   locale: null;
   user: User & {
@@ -192,48 +188,27 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-groups".
+ * via the `definition` "team".
  */
-export interface TeamGroup {
+export interface Team {
   id: number;
   name: string;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-items".
- */
-export interface TeamItem {
-  id: number;
-  category: number | TeamGroup;
-  name: string;
-  role: string;
-  bio?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  photo?: (number | null) | Media;
-  email?: string | null;
-  phone?: string | null;
-  linkedin?: string | null;
-  twitter?: string | null;
-  facebook?: string | null;
-  instagram?: string | null;
+  items?:
+    | {
+        name: string;
+        role: string;
+        bio?: string | null;
+        photo?: (number | null) | Media;
+        email?: string | null;
+        phone?: string | null;
+        linkedin?: string | null;
+        twitter?: string | null;
+        facebook?: string | null;
+        instagram?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  slug: string;
   order: number;
   updatedAt: string;
   createdAt: string;
@@ -358,40 +333,33 @@ export interface PressRelease {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-groups".
+ * via the `definition` "faq".
  */
-export interface FaqGroup {
+export interface Faq {
   id: number;
   name: string;
-  description?: string | null;
-  icon?: (number | null) | Media;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-items".
- */
-export interface FaqItem {
-  id: number;
-  category: number | FaqGroup;
-  question: string;
-  answer: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  items?:
+    | {
+        question: string;
+        answer: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  slug: string;
   order: number;
   updatedAt: string;
   createdAt: string;
@@ -480,6 +448,29 @@ export interface ContactEmail {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "restaurant-menu".
+ */
+export interface RestaurantMenu {
+  id: number;
+  name: string;
+  items?:
+    | {
+        name: string;
+        description?: string | null;
+        price?: number | null;
+        image?: (number | null) | Media;
+        dietary?: string | null;
+        spicyLevel?: ('none' | 'mild' | 'medium' | 'hot' | 'extra-hot') | null;
+        id?: string | null;
+      }[]
+    | null;
+  slug: string;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -511,12 +502,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'team-groups';
-        value: number | TeamGroup;
-      } | null)
-    | ({
-        relationTo: 'team-items';
-        value: number | TeamItem;
+        relationTo: 'team';
+        value: number | Team;
       } | null)
     | ({
         relationTo: 'events';
@@ -535,12 +522,8 @@ export interface PayloadLockedDocument {
         value: number | PressRelease;
       } | null)
     | ({
-        relationTo: 'faq-groups';
-        value: number | FaqGroup;
-      } | null)
-    | ({
-        relationTo: 'faq-items';
-        value: number | FaqItem;
+        relationTo: 'faq';
+        value: number | Faq;
       } | null)
     | ({
         relationTo: 'blog-posts';
@@ -557,6 +540,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-emails';
         value: number | ContactEmail;
+      } | null)
+    | ({
+        relationTo: 'restaurant-menu';
+        value: number | RestaurantMenu;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -642,32 +629,26 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-groups_select".
+ * via the `definition` "team_select".
  */
-export interface TeamGroupsSelect<T extends boolean = true> {
+export interface TeamSelect<T extends boolean = true> {
   name?: T;
-  description?: T;
-  icon?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "team-items_select".
- */
-export interface TeamItemsSelect<T extends boolean = true> {
-  category?: T;
-  name?: T;
-  role?: T;
-  bio?: T;
-  photo?: T;
-  email?: T;
-  phone?: T;
-  linkedin?: T;
-  twitter?: T;
-  facebook?: T;
-  instagram?: T;
+  items?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        photo?: T;
+        email?: T;
+        phone?: T;
+        linkedin?: T;
+        twitter?: T;
+        facebook?: T;
+        instagram?: T;
+        id?: T;
+      };
+  slug?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -732,24 +713,18 @@ export interface PressReleasesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-groups_select".
+ * via the `definition` "faq_select".
  */
-export interface FaqGroupsSelect<T extends boolean = true> {
+export interface FaqSelect<T extends boolean = true> {
   name?: T;
-  description?: T;
-  icon?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faq-items_select".
- */
-export interface FaqItemsSelect<T extends boolean = true> {
-  category?: T;
-  question?: T;
-  answer?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  slug?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -815,6 +790,28 @@ export interface ContactEmailsSelect<T extends boolean = true> {
   subject?: T;
   message?: T;
   submittedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "restaurant-menu_select".
+ */
+export interface RestaurantMenuSelect<T extends boolean = true> {
+  name?: T;
+  items?:
+    | T
+    | {
+        name?: T;
+        description?: T;
+        price?: T;
+        image?: T;
+        dietary?: T;
+        spicyLevel?: T;
+        id?: T;
+      };
+  slug?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -928,33 +925,6 @@ export interface OpeningHour {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu".
- */
-export interface Menu {
-  id: number;
-  pdf?: (number | null) | Media;
-  categories?:
-    | {
-        name: string;
-        dishes?:
-          | {
-              name: string;
-              description?: string | null;
-              price?: number | null;
-              image?: (number | null) | Media;
-              dietary?: string | null;
-              spicyLevel?: ('none' | 'mild' | 'medium' | 'hot' | 'extra-hot') | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "company-info_select".
  */
 export interface CompanyInfoSelect<T extends boolean = true> {
@@ -1036,33 +1006,6 @@ export interface OpeningHoursSelect<T extends boolean = true> {
         open?: T;
         close?: T;
         isOpen?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "menu_select".
- */
-export interface MenuSelect<T extends boolean = true> {
-  pdf?: T;
-  categories?:
-    | T
-    | {
-        name?: T;
-        dishes?:
-          | T
-          | {
-              name?: T;
-              description?: T;
-              price?: T;
-              image?: T;
-              dietary?: T;
-              spicyLevel?: T;
-              id?: T;
-            };
-        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

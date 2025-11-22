@@ -1,0 +1,34 @@
+{
+    "labels": {
+        "singular": {
+            "en": "Press Release",
+            "fr": "Communiqué de presse"
+        },
+        "plural": {
+            "en": "Press Releases",
+            "fr": "Communiqués de presse"
+        }
+    },
+    "fields": {
+        "title": {
+            "en": "Title",
+            "fr": "Titre"
+        },
+        "journal": {
+            "en": "Journal",
+            "fr": "Journal"
+        },
+        "excerpt": {
+            "en": "Excerpt",
+            "fr": "Extrait"
+        },
+        "link": {
+            "en": "Link",
+            "fr": "Lien"
+        },
+        "publishedDate": {
+            "en": "Published Date",
+            "fr": "Date de publication"
+        }
+    }
+}

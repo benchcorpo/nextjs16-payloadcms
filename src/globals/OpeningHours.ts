@@ -1,6 +1,6 @@
 import { GlobalConfig, Field } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 
 const dayFields: Field[] = [
     {
@@ -24,9 +24,8 @@ const dayFields: Field[] = [
 export const OpeningHours: GlobalConfig = {
     slug: "opening-hours",
     access: {
-        read: () => true,
+        read: ({ req: { user } }) => !!user,
     },
-    endpoints: false,
     label: i18n.globals.openingHours.label,
     fields: [
         {

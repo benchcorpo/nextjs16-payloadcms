@@ -1,40 +1,36 @@
 import { CompanyInfo } from "./globals/CompanyInfo";
 import { OpeningHours } from "./globals/OpeningHours";
-import { Menu } from "./globals/Menu";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Events } from "./collections/Events";
-import { FAQItems } from "./collections/FAQItems";
-import { FAQGroups } from "./collections/FAQGroups";
+import { FAQ } from "./collections/FAQ";
 import { JobOffers } from "./collections/JobOffers";
-import { TeamItems } from "./collections/TeamItems";
-import { TeamGroups } from "./collections/TeamGroups";
+import { Team } from "./collections/Team";
 import { Testimonials } from "./collections/Testimonials";
 import { PressReleases } from "./collections/PressReleases";
 import { BlogPosts } from "./collections/BlogPosts";
 import { BlogAuthors } from "./collections/BlogAuthors";
 import { BlogCategories } from "./collections/BlogCategories";
 import { ContactEmails } from "./collections/ContactEmails";
+import { RestaurantMenu } from "./collections/RestaurantMenu";
 
 export const globals = [
     CompanyInfo,
     OpeningHours,
-    Menu,
 ];
 
 export const collections = [
     Users,
     Media,
-    TeamGroups,
-    TeamItems,
+    Team,
     Events,
     JobOffers,
     Testimonials,
     PressReleases,
-    FAQGroups,
-    FAQItems,
+    FAQ,
     BlogPosts,
     BlogAuthors,
     BlogCategories,
     ContactEmails,
+    RestaurantMenu,
 ];

@@ -1,13 +1,12 @@
 import { CollectionConfig } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 
 export const Events: CollectionConfig = {
   slug: "events",
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => !!user,
   },
-  endpoints: false,
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "location", "date"],

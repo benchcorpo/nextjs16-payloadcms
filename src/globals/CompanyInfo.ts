@@ -1,13 +1,12 @@
 import { GlobalConfig } from "payload";
 
-import i18n from "../i18n.json";
+import i18n from "../i18n";
 
 export const CompanyInfo: GlobalConfig = {
   slug: "company-info",
   access: {
-    read: () => true,
+    read: ({ req: { user } }) => !!user,
   },
-  endpoints: false,
   label: i18n.globals.companyInfo.label,
   fields: [
     {
