@@ -3,14 +3,24 @@
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
 
+// TYPES
 export type ContactEmailData = {
     name: string;
     email: string;
     phone?: string;
     subject: string;
     message: string;
-    emailHtml: string; // Required: agent must provide HTML
+    /** HTML template for the email - agent must generate this */
+    emailHtml: string;
 };
+
+export type ContactEmailResult = {
+    success: boolean;
+    id?: string | number;
+    error?: string;
+};
+
+// PUBLIC API
 
 /**
  * Submit a contact email
@@ -24,7 +34,7 @@ export type ContactEmailData = {
  */
 export async function submitContactEmail(
     data: ContactEmailData
-): Promise<{ success: boolean; id?: string | number; error?: string }> {
+): Promise<ContactEmailResult> {
     try {
         const payload = await getPayload({ config: configPromise });
 
