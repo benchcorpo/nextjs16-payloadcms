@@ -8,12 +8,13 @@ export async function seedBlog(payload: Payload) {
   // Create categories
   const categories = [];
   for (let i = 0; i < 5; i++) {
+    const name = faker.word.noun();
     const category = await payload.create({
       collection: "blog-categories",
       data: {
-        name: faker.word.noun(),
+        name,
         description: faker.lorem.sentence(),
-        slug: faker.helpers.slugify(faker.word.noun()).toLowerCase(),
+        slug: faker.helpers.slugify(name).toLowerCase(),
         order: i,
       },
     });
@@ -24,12 +25,13 @@ export async function seedBlog(payload: Payload) {
   // Create authors
   const authors = [];
   for (let i = 0; i < 3; i++) {
+    const name = faker.person.fullName();
     const author = await payload.create({
       collection: "blog-authors",
       data: {
-        name: faker.person.fullName(),
+        name,
         description: faker.person.bio(),
-        slug: faker.helpers.slugify(faker.person.fullName()).toLowerCase(),
+        slug: faker.helpers.slugify(name).toLowerCase(),
         order: i,
       },
     });
@@ -39,11 +41,12 @@ export async function seedBlog(payload: Payload) {
 
   // Create blog posts
   for (let i = 0; i < 15; i++) {
+    const title = faker.lorem.sentence();
     await payload.create({
       collection: "blog-posts",
       data: {
-        title: faker.lorem.sentence(),
-        slug: faker.helpers.slugify(faker.lorem.sentence()).toLowerCase(),
+        title,
+        slug: faker.helpers.slugify(title).toLowerCase(),
         content: createRichTextParagraphs(
           Array.from({ length: 5 }, () => faker.lorem.paragraph())
         ),
