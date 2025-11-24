@@ -8,6 +8,7 @@ import configPromise from "@/src/payload.config";
 export type JobOffer = {
     id: string;
     title: string;
+    slug: string;
     location: string;
     /** Rich text job description (HTML) */
     description: string;
@@ -56,4 +57,24 @@ export async function getAllJobOffers(): Promise<JobOffer[]> {
     });
 
     return docs as unknown as JobOffer[];
+}
+
+/**
+ * Get a single job offer by slug
+ */
+export async function getJobOfferBySlug(slug: string): Promise<JobOffer | null> {
+    const payload = await getPayload({ config: configPromise });
+
+    const { docs } = await payload.find({
+        collection: "job-offers",
+        where: {
+            slug: {
+                equals: slug,
+            },
+        },
+        limit: 1,
+        depth: 1,
+    });
+
+    return docs[0] ? (docs[0] as unknown as JobOffer) : null;
 }

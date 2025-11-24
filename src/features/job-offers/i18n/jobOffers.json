@@ -47,6 +47,10 @@
         "postedDate": {
             "en": "Posted Date",
             "fr": "Date de publication"
+        },
+        "slug": {
+            "en": "Slug",
+            "fr": "Slug"
         }
     }
 }

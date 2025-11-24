@@ -1,6 +1,7 @@
 import { CollectionConfig } from "payload";
 
 import i18n from "../i18n/jobOffers.json";
+import { SlugField } from "@/src/fields/SlugField";
 
 export const JobOffers: CollectionConfig = {
   slug: "job-offers",
@@ -62,6 +63,7 @@ export const JobOffers: CollectionConfig = {
         {
           label: i18n.tabs.advanced,
           fields: [
+            SlugField("title"),
             {
               name: "postedDate",
               type: "date",

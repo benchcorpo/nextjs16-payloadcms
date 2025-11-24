@@ -9,6 +9,16 @@
             "fr": "Communiqués de presse"
         }
     },
+    "tabs": {
+        "content": {
+            "en": "Content",
+            "fr": "Contenu"
+        },
+        "advanced": {
+            "en": "Advanced",
+            "fr": "Avancé"
+        }
+    },
     "fields": {
         "title": {
             "en": "Title",
@@ -29,6 +39,10 @@
         "publishedDate": {
             "en": "Published Date",
             "fr": "Date de publication"
+        },
+        "slug": {
+            "en": "Slug",
+            "fr": "Slug"
         }
     }
 }

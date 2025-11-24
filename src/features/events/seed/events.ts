@@ -13,6 +13,7 @@ export async function seedEvents(payload: Payload) {
 
   const eventImage = await seedAsset(payload, __dirname, "event-placeholder.png", "Event Placeholder");
 
+  let createdEvents = 0;
   for (let i = 0; i < 10; i++) {
     const startDate = faker.date.future();
     const endDate = faker.helpers.maybe(
@@ -23,24 +24,37 @@ export async function seedEvents(payload: Payload) {
         )
     );
 
-    await payload.create({
+    const title = faker.lorem.sentence();
+    const slug = faker.helpers.slugify(title).toLowerCase();
+
+    const existing = await payload.find({
       collection: "events",
-      data: {
-        title: faker.lorem.sentence(),
-        image: eventImage?.id,
-        description: createRichTextParagraphs([
-          faker.lorem.paragraph(),
-          faker.lorem.paragraph(),
-        ]),
-        location: faker.location.city() + ", " + faker.location.country(),
-        date: startDate.toISOString(),
-        endDate: endDate?.toISOString(),
-        virtualLink: faker.helpers.maybe(() => faker.internet.url()),
-        registrationLink: faker.helpers.maybe(() => faker.internet.url()),
-      },
+      where: { slug: { equals: slug } },
+      limit: 1,
     });
+
+    if (existing.docs.length === 0) {
+      await payload.create({
+        collection: "events",
+        data: {
+          title,
+          slug,
+          image: eventImage?.id,
+          description: createRichTextParagraphs([
+            faker.lorem.paragraph(),
+            faker.lorem.paragraph(),
+          ]),
+          location: faker.location.city() + ", " + faker.location.country(),
+          date: startDate.toISOString(),
+          endDate: endDate?.toISOString(),
+          virtualLink: faker.helpers.maybe(() => faker.internet.url()),
+          registrationLink: faker.helpers.maybe(() => faker.internet.url()),
+        },
+      });
+      createdEvents++;
+    }
   }
 
-  console.log("  ✓ Created 10 events");
+  console.log(`  ✓ Created ${createdEvents} events`);
   console.log("✅ Events seeded");
 }

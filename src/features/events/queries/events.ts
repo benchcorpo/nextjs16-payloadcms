@@ -8,6 +8,7 @@ import configPromise from "@/src/payload.config";
 export type Event = {
     id: string;
     title: string;
+    slug: string;
     /** Rich text description (HTML) */
     description: string;
     /** Physical location (required) */
@@ -65,4 +66,24 @@ export async function getAllEvents(limit = 50): Promise<Event[]> {
     });
 
     return docs as unknown as Event[];
+}
+
+/**
+ * Get a single event by slug
+ */
+export async function getEventBySlug(slug: string): Promise<Event | null> {
+    const payload = await getPayload({ config: configPromise });
+
+    const { docs } = await payload.find({
+        collection: "events",
+        where: {
+            slug: {
+                equals: slug,
+            },
+        },
+        limit: 1,
+        depth: 1,
+    });
+
+    return docs[0] ? (docs[0] as unknown as Event) : null;
 }

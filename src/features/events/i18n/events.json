@@ -17,6 +17,10 @@
         "links": {
             "en": "Links",
             "fr": "Liens"
+        },
+        "advanced": {
+            "en": "Advanced",
+            "fr": "Avancé"
         }
     },
     "fields": {
@@ -51,6 +55,10 @@
         "registrationLink": {
             "en": "Registration Link",
             "fr": "Lien d'inscription"
+        },
+        "slug": {
+            "en": "Slug",
+            "fr": "Slug"
         }
     }
 }

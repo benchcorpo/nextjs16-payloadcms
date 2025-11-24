@@ -296,6 +296,7 @@ export interface Event {
   endDate?: string | null;
   virtualLink?: string | null;
   registrationLink?: string | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -372,6 +373,7 @@ export interface JobOffer {
   };
   applicationLink?: string | null;
   active?: boolean | null;
+  slug: string;
   postedDate: string;
   updatedAt: string;
   createdAt: string;
@@ -401,6 +403,7 @@ export interface PressRelease {
   } | null;
   link?: string | null;
   publishedDate: string;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -704,6 +707,7 @@ export interface EventsSelect<T extends boolean = true> {
   endDate?: T;
   virtualLink?: T;
   registrationLink?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -736,6 +740,7 @@ export interface JobOffersSelect<T extends boolean = true> {
   requirements?: T;
   applicationLink?: T;
   active?: T;
+  slug?: T;
   postedDate?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -750,6 +755,7 @@ export interface PressReleasesSelect<T extends boolean = true> {
   excerpt?: T;
   link?: T;
   publishedDate?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

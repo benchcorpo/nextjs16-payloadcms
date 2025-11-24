@@ -1,6 +1,7 @@
 import { CollectionConfig } from "payload";
 
 import i18n from "../i18n/events.json";
+import { SlugField } from "@/src/fields/SlugField";
 
 export const Events: CollectionConfig = {
   slug: "events",
@@ -82,6 +83,12 @@ export const Events: CollectionConfig = {
               type: "text",
               label: i18n.fields.registrationLink,
             },
+          ],
+        },
+        {
+          label: i18n.tabs.advanced,
+          fields: [
+            SlugField("title"),
           ],
         },
       ],
