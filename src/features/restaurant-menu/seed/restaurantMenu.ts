@@ -1,8 +1,8 @@
-import { Payload } from "payload";
-import { faker } from "@faker-js/faker";
 import path from "path";
-import fs from "fs";
+import { Payload } from "payload";
 import { fileURLToPath } from "url";
+import { faker } from "@faker-js/faker";
+import { seedAsset } from "@/src/utils/seed";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,28 +10,7 @@ const __dirname = path.dirname(__filename);
 export async function seedRestaurantMenu(payload: Payload) {
   console.log("🌱 Seeding restaurant menu...");
 
-  const seedAsset = async (fileName: string, alt: string) => {
-    const filePath = path.join(__dirname, "assets", fileName);
-    if (!fs.existsSync(filePath)) {
-      console.warn(`Warning: Seed asset not found at ${filePath}`);
-      return null;
-    }
-
-    const fileBuffer = fs.readFileSync(filePath);
-
-    return await payload.create({
-      collection: "media",
-      data: { alt },
-      file: {
-        data: fileBuffer,
-        name: fileName,
-        mimetype: "image/png",
-        size: fileBuffer.length,
-      },
-    });
-  };
-
-  const menuItemImage = await seedAsset("menu-item-placeholder.png", "Menu Item Placeholder");
+  const menuItemImage = await seedAsset(payload, __dirname, "menu-item-placeholder.png", "Menu Item Placeholder");
 
   const categories = ["Appetizers", "Main Courses", "Desserts", "Beverages"];
   const spicyLevels = ["none", "mild", "medium", "hot", "extra-hot"] as const;
