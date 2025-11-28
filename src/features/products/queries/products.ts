@@ -2,52 +2,7 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type ProductItem = {
-    id: string;
-    name: string;
-    slug: string;
-    /** Rich text description (HTML) */
-    description?: string;
-    price?: number;
-    gallery?: Array<{
-        url: string;
-        alt?: string;
-    }>;
-    /** Categories is required and can have multiple values */
-    categories: Array<{
-        id: string;
-        name: string;
-        slug: string;
-    }>;
-    specifications?: Array<{
-        name: string;
-        value: string;
-    }>;
-    relatedProducts?: Array<{
-        id: string;
-        name: string;
-        slug: string;
-    }>;
-};
-
-export type ProductCategory = {
-    id: string;
-    name: string;
-    slug: string;
-    description?: string;
-    parent?: {
-        id: string;
-        name: string;
-        slug: string;
-    };
-    image?: {
-        url: string;
-        alt?: string;
-    };
-};
+import type { ProductItem, ProductCategory } from "@/src/payload-types";
 
 // PUBLIC API
 
@@ -76,7 +31,7 @@ export async function getProductItems(options?: {
         depth: 2,
     });
 
-    return docs as unknown as ProductItem[];
+    return docs;
 }
 
 /**
@@ -96,7 +51,7 @@ export async function getProductItem(slug: string): Promise<ProductItem | null> 
         depth: 2,
     });
 
-    return docs[0] ? (docs[0] as unknown as ProductItem) : null;
+    return docs[0] || null;
 }
 
 /**
@@ -111,7 +66,7 @@ export async function getProductCategories(): Promise<ProductCategory[]> {
         depth: 1,
     });
 
-    return docs as unknown as ProductCategory[];
+    return docs;
 }
 
 /**
@@ -130,13 +85,13 @@ export async function getRootProductCategories(): Promise<ProductCategory[]> {
         sort: "order",
     });
 
-    return docs as unknown as ProductCategory[];
+    return docs;
 }
 
 /**
  * Get subcategories of a specific category
  */
-export async function getSubCategories(parentSlug: string): Promise<ProductCategory[]> {
+export async function getProductSubCategories(parentSlug: string): Promise<ProductCategory[]> {
     const payload = await getPayload({ config: configPromise });
 
     // First, find the parent category
@@ -153,7 +108,7 @@ export async function getSubCategories(parentSlug: string): Promise<ProductCateg
         sort: "order",
     });
 
-    return docs as unknown as ProductCategory[];
+    return docs;
 }
 
 /**
@@ -173,5 +128,12 @@ export async function getProductCategory(slug: string): Promise<ProductCategory 
         depth: 1,
     });
 
-    return docs[0] ? (docs[0] as unknown as ProductCategory) : null;
+    return docs[0] || null;
+}
+
+/**
+ * Get products by category slug
+ */
+export async function getProductsByCategory(categorySlug: string, limit = 10): Promise<ProductItem[]> {
+    return getProductItems({ category: categorySlug, limit });
 }

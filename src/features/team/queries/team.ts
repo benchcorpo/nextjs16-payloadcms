@@ -2,39 +2,14 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type TeamMember = {
-    name: string;
-    role: string;
-    bio?: string;
-    photo?: {
-        url: string;
-        alt?: string;
-    };
-    email?: string;
-    phone?: string;
-    linkedin?: string;
-    twitter?: string;
-    facebook?: string;
-    instagram?: string;
-};
-
-export type TeamGroup = {
-    id: string;
-    name: string;
-    slug: string;
-    order: number;
-    items: TeamMember[];
-};
+import type { Team } from "@/src/payload-types";
 
 // PUBLIC API
 
 /**
  * Get all team groups with their members
  */
-export async function getTeamGroups(): Promise<TeamGroup[]> {
+export async function getTeamGroups(): Promise<Team[]> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
@@ -43,13 +18,13 @@ export async function getTeamGroups(): Promise<TeamGroup[]> {
         depth: 2,
     });
 
-    return docs as unknown as TeamGroup[];
+    return docs;
 }
 
 /**
  * Get a single team group by slug
  */
-export async function getTeamGroup(slug: string): Promise<TeamGroup | null> {
+export async function getTeamGroup(slug: string): Promise<Team | null> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
@@ -63,5 +38,5 @@ export async function getTeamGroup(slug: string): Promise<TeamGroup | null> {
         depth: 2,
     });
 
-    return docs[0] ? (docs[0] as unknown as TeamGroup) : null;
+    return docs[0] || null;
 }

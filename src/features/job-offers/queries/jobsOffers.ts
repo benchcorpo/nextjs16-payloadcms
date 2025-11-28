@@ -2,25 +2,7 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type JobOffer = {
-    id: string;
-    title: string;
-    slug: string;
-    location: string;
-    /** Rich text job description (HTML) */
-    description: string;
-    /** Rich text requirements (HTML) */
-    requirements: string;
-    /** URL to apply for the job */
-    applicationLink?: string;
-    /** Whether the job is currently open */
-    active: boolean;
-    /** ISO date string */
-    postedDate: string;
-};
+import type { JobOffer } from "@/src/payload-types";
 
 // PUBLIC API
 
@@ -41,13 +23,13 @@ export async function getActiveJobOffers(): Promise<JobOffer[]> {
         depth: 1,
     });
 
-    return docs as unknown as JobOffer[];
+    return docs;
 }
 
 /**
  * Get all job offers (including inactive)
  */
-export async function getAllJobOffers(): Promise<JobOffer[]> {
+export async function getJobOffers(): Promise<JobOffer[]> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
@@ -56,13 +38,13 @@ export async function getAllJobOffers(): Promise<JobOffer[]> {
         depth: 1,
     });
 
-    return docs as unknown as JobOffer[];
+    return docs;
 }
 
 /**
  * Get a single job offer by slug
  */
-export async function getJobOfferBySlug(slug: string): Promise<JobOffer | null> {
+export async function getJobOffer(slug: string): Promise<JobOffer | null> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
@@ -76,5 +58,5 @@ export async function getJobOfferBySlug(slug: string): Promise<JobOffer | null> 
         depth: 1,
     });
 
-    return docs[0] ? (docs[0] as unknown as JobOffer) : null;
+    return docs[0] || null;
 }

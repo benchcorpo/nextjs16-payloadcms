@@ -2,30 +2,7 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type Event = {
-    id: string;
-    title: string;
-    slug: string;
-    /** Rich text description (HTML) */
-    description: string;
-    /** Physical location (required) */
-    location: string;
-    image?: {
-        url: string;
-        alt?: string;
-    };
-    /** ISO date string - event start */
-    date: string;
-    /** ISO date string - event end (optional) */
-    endDate?: string;
-    /** URL for virtual attendance */
-    virtualLink?: string;
-    /** URL for registration */
-    registrationLink?: string;
-};
+import type { Event } from "@/src/payload-types";
 
 // PUBLIC API
 
@@ -49,29 +26,33 @@ export async function getUpcomingEvents(limit = 10): Promise<Event[]> {
         depth: 1,
     });
 
-    return docs as unknown as Event[];
+    return docs;
 }
 
 /**
- * Get all events (past and future)
+ * Get all events (past and future) with optional pagination
  */
-export async function getAllEvents(limit = 50): Promise<Event[]> {
+export async function getEvents(options?: {
+    limit?: number;
+    page?: number;
+}): Promise<Event[]> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
         collection: "events",
-        limit,
+        limit: options?.limit || 50,
+        page: options?.page || 1,
         sort: "-date",
         depth: 1,
     });
 
-    return docs as unknown as Event[];
+    return docs;
 }
 
 /**
  * Get a single event by slug
  */
-export async function getEventBySlug(slug: string): Promise<Event | null> {
+export async function getEvent(slug: string): Promise<Event | null> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
@@ -85,5 +66,5 @@ export async function getEventBySlug(slug: string): Promise<Event | null> {
         depth: 1,
     });
 
-    return docs[0] ? (docs[0] as unknown as Event) : null;
+    return docs[0] || null;
 }

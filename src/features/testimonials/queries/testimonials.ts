@@ -2,26 +2,7 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type Testimonial = {
-    id: string;
-    /** Client name */
-    client: string;
-    /** Client's company (optional) */
-    company?: string;
-    /** Testimonial text */
-    quote: string;
-    photo?: {
-        url: string;
-        alt?: string;
-    };
-    /** Rating from 1-5 */
-    rating?: number;
-    /** ISO date string */
-    date: string;
-};
+import type { Testimonial } from "@/src/payload-types";
 
 // PUBLIC API
 
@@ -38,5 +19,5 @@ export async function getTestimonials(limit = 20): Promise<Testimonial[]> {
         depth: 1,
     });
 
-    return docs as unknown as Testimonial[];
+    return docs;
 }

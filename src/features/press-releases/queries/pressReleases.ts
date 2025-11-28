@@ -2,22 +2,7 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type PressRelease = {
-    id: string;
-    title: string;
-    slug: string;
-    /** Name of the publication/journal */
-    journal?: string;
-    /** Rich text excerpt (HTML) */
-    excerpt?: string;
-    /** URL to the full article */
-    link?: string;
-    /** ISO date string */
-    publishedDate: string;
-};
+import type { PressRelease } from "@/src/payload-types";
 
 // PUBLIC API
 
@@ -34,13 +19,13 @@ export async function getPressReleases(limit = 20): Promise<PressRelease[]> {
         depth: 1,
     });
 
-    return docs as unknown as PressRelease[];
+    return docs;
 }
 
 /**
  * Get a single press release by slug
  */
-export async function getPressReleaseBySlug(slug: string): Promise<PressRelease | null> {
+export async function getPressRelease(slug: string): Promise<PressRelease | null> {
     const payload = await getPayload({ config: configPromise });
 
     const { docs } = await payload.find({
@@ -54,5 +39,5 @@ export async function getPressReleaseBySlug(slug: string): Promise<PressRelease 
         depth: 1,
     });
 
-    return docs[0] ? (docs[0] as unknown as PressRelease) : null;
+    return docs[0] || null;
 }

@@ -2,54 +2,7 @@
 
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
-
-// TYPES
-
-export type BlogPost = {
-    id: string;
-    title: string;
-    slug: string;
-    /** Rich text content (HTML) */
-    content: string;
-    /** Short summary (optional) */
-    excerpt?: string;
-    /** ISO date string */
-    publishedDate: string;
-    featuredImage?: {
-        url: string;
-        alt?: string;
-    };
-    /** Author is required */
-    author: {
-        id: string;
-        name: string;
-    };
-    /** Category is required */
-    category: {
-        id: string;
-        name: string;
-        slug: string;
-    };
-    tags?: string[];
-    /** SEO meta title */
-    metaTitle?: string;
-    /** SEO meta description */
-    metaDescription?: string;
-};
-
-export type BlogAuthor = {
-    id: string;
-    name: string;
-    description?: string;
-    slug: string;
-};
-
-export type BlogCategory = {
-    id: string;
-    name: string;
-    description?: string;
-    slug: string;
-};
+import type { BlogPost, BlogAuthor, BlogCategory } from "@/src/payload-types";
 
 // PUBLIC API
 
@@ -60,25 +13,30 @@ export async function getBlogPosts(options?: {
     limit?: number;
     page?: number;
     category?: string;
+    author?: string;
 }): Promise<BlogPost[]> {
     const payload = await getPayload({ config: configPromise });
+
+    const where: any = {};
+
+    if (options?.category) {
+        where["category.slug"] = { equals: options.category };
+    }
+
+    if (options?.author) {
+        where["author.slug"] = { equals: options.author };
+    }
 
     const { docs } = await payload.find({
         collection: "blog-posts",
         limit: options?.limit || 10,
         page: options?.page || 1,
-        where: options?.category
-            ? {
-                "category.slug": {
-                    equals: options.category,
-                },
-            }
-            : undefined,
+        where: Object.keys(where).length > 0 ? where : undefined,
         sort: "-publishedDate",
         depth: 2,
     });
 
-    return docs as unknown as BlogPost[];
+    return docs;
 }
 
 /**
@@ -98,7 +56,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         depth: 2,
     });
 
-    return docs[0] ? (docs[0] as unknown as BlogPost) : null;
+    return docs[0] || null;
 }
 
 /**
@@ -112,7 +70,7 @@ export async function getBlogCategories(): Promise<BlogCategory[]> {
         sort: "order",
     });
 
-    return docs as unknown as BlogCategory[];
+    return docs;
 }
 
 /**
@@ -126,7 +84,7 @@ export async function getBlogAuthors(): Promise<BlogAuthor[]> {
         sort: "order",
     });
 
-    return docs as unknown as BlogAuthor[];
+    return docs;
 }
 
 /**
@@ -143,9 +101,10 @@ export async function getBlogAuthor(slug: string): Promise<BlogAuthor | null> {
             },
         },
         limit: 1,
+        depth: 1,
     });
 
-    return docs[0] ? (docs[0] as unknown as BlogAuthor) : null;
+    return docs[0] || null;
 }
 
 /**
@@ -164,5 +123,19 @@ export async function getBlogCategory(slug: string): Promise<BlogCategory | null
         limit: 1,
     });
 
-    return docs[0] ? (docs[0] as unknown as BlogCategory) : null;
+    return docs[0] || null;
+}
+
+/**
+ * Get blog posts by author slug
+ */
+export async function getBlogPostsByAuthor(authorSlug: string, limit = 10): Promise<BlogPost[]> {
+    return getBlogPosts({ author: authorSlug, limit });
+}
+
+/**
+ * Get blog posts by category slug
+ */
+export async function getBlogPostsByCategory(categorySlug: string, limit = 10): Promise<BlogPost[]> {
+    return getBlogPosts({ category: categorySlug, limit });
 }
