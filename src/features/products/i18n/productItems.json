@@ -1,0 +1,78 @@
+{
+    "labels": {
+        "singular": {
+            "en": "Product Item",
+            "fr": "Produit"
+        },
+        "plural": {
+            "en": "Product Items",
+            "fr": "Produits"
+        }
+    },
+    "tabs": {
+        "content": {
+            "en": "Content",
+            "fr": "Contenu"
+        },
+        "advanced": {
+            "en": "Advanced",
+            "fr": "Avancé"
+        }
+    },
+    "fields": {
+        "name": {
+            "en": "Name",
+            "fr": "Nom"
+        },
+        "categories": {
+            "en": "Categories",
+            "fr": "Catégories"
+        },
+        "gallery": {
+            "en": "Gallery",
+            "fr": "Galerie"
+        },
+        "price": {
+            "en": "Price",
+            "fr": "Prix"
+        },
+        "specifications": {
+            "label": {
+                "en": "Specifications",
+                "fr": "Caractéristiques"
+            },
+            "labels": {
+                "singular": {
+                    "en": "Specification",
+                    "fr": "Caractéristique"
+                },
+                "plural": {
+                    "en": "Specifications",
+                    "fr": "Caractéristiques"
+                }
+            },
+            "fields": {
+                "name": {
+                    "en": "Name",
+                    "fr": "Nom"
+                },
+                "value": {
+                    "en": "Value",
+                    "fr": "Valeur"
+                }
+            }
+        },
+        "description": {
+            "en": "Description",
+            "fr": "Description"
+        },
+        "relatedProducts": {
+            "en": "Related Products",
+            "fr": "Produits associés"
+        },
+        "order": {
+            "en": "Order",
+            "fr": "Ordre"
+        }
+    }
+}

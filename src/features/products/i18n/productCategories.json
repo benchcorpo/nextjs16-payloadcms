@@ -1,0 +1,44 @@
+{
+    "labels": {
+        "singular": {
+            "en": "Product Category",
+            "fr": "Catégorie de produits"
+        },
+        "plural": {
+            "en": "Product Categories",
+            "fr": "Catégories de produits"
+        }
+    },
+    "tabs": {
+        "content": {
+            "en": "Content",
+            "fr": "Contenu"
+        },
+        "advanced": {
+            "en": "Advanced",
+            "fr": "Avancé"
+        }
+    },
+    "fields": {
+        "name": {
+            "en": "Name",
+            "fr": "Nom"
+        },
+        "parent": {
+            "en": "Parent Category",
+            "fr": "Catégorie parente"
+        },
+        "image": {
+            "en": "Image",
+            "fr": "Image"
+        },
+        "description": {
+            "en": "Description",
+            "fr": "Description"
+        },
+        "order": {
+            "en": "Order",
+            "fr": "Ordre"
+        }
+    }
+}

@@ -1,26 +1,28 @@
-import Blog from "@/src/features/blog";
-import ContactEmail from "@/src/features/contact-emails";
-import Events from "@/src/features/events";
 import Faq from "@/src/features/faq";
+import Blog from "@/src/features/blog";
+import Team from "@/src/features/team";
+import Events from "@/src/features/events";
+import Settings from "@/src/features/settings";
+import Products from "@/src/features/products";
 import JobOffers from "@/src/features/job-offers";
 import OpeningHours from "@/src/features/opening-hours";
+import Testimonials from "@/src/features/testimonials";
+import ContactEmails from "@/src/features/contact-emails";
 import PressReleases from "@/src/features/press-releases";
 import RestaurantMenu from "@/src/features/restaurant-menu";
-import Settings from "@/src/features/settings";
-import Team from "@/src/features/team";
-import Testimonials from "@/src/features/testimonials";
 
 
 export const config = [
-    Blog,
-    ContactEmail,
-    Events,
     Faq,
+    Blog,
+    Team,
+    Events,
+    Settings,
+    Products,
     JobOffers,
     OpeningHours,
+    Testimonials,
+    ContactEmails,
     PressReleases,
     RestaurantMenu,
-    Settings,
-    Team,
-    Testimonials,
 ];
