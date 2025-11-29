@@ -5,7 +5,7 @@ import i18n from "../i18n/media.json";
 export const Media: CollectionConfig = {
   slug: "media",
   access: {
-    read: ({ req: { user } }) => !!user,
+    read: () => true,
   },
   labels: {
     singular: i18n.labels.singular,
