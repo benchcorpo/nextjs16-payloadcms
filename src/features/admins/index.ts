@@ -1,9 +1,9 @@
 import { Feature } from "../index";
-import { Users } from "./collections/Users";
+import { Admins } from "./collections/Admins";
 
 const feature: Feature = {
   globals: [],
-  collections: [Users],
+  collections: [Admins],
   seeds: [],
 };
 

@@ -110,7 +110,7 @@ export default buildConfig({
   }),
   email: getEmailConfig(),
   admin: {
-    user: "users",
+    user: "admins",
     importMap: {
       baseDir: path.resolve(dirname),
     },

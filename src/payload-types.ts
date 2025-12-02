@@ -63,7 +63,7 @@ export type SupportedTimezones =
 
 export interface Config {
   auth: {
-    users: UserAuthOperations;
+    admins: AdminAuthOperations;
   };
   blocks: {};
   collections: {
@@ -80,7 +80,7 @@ export interface Config {
     'contact-emails': ContactEmail;
     'press-releases': PressRelease;
     'restaurant-menu': RestaurantMenu;
-    users: User;
+    admins: Admin;
     media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -102,7 +102,7 @@ export interface Config {
     'contact-emails': ContactEmailsSelect<false> | ContactEmailsSelect<true>;
     'press-releases': PressReleasesSelect<false> | PressReleasesSelect<true>;
     'restaurant-menu': RestaurantMenuSelect<false> | RestaurantMenuSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
+    admins: AdminsSelect<false> | AdminsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -121,15 +121,15 @@ export interface Config {
     settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: null;
-  user: User & {
-    collection: 'users';
+  user: Admin & {
+    collection: 'admins';
   };
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
-export interface UserAuthOperations {
+export interface AdminAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -507,9 +507,9 @@ export interface RestaurantMenu {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "admins".
  */
-export interface User {
+export interface Admin {
   id: number;
   updatedAt: string;
   createdAt: string;
@@ -606,8 +606,8 @@ export interface PayloadLockedDocument {
         value: number | RestaurantMenu;
       } | null)
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'admins';
+        value: number | Admin;
       } | null)
     | ({
         relationTo: 'media';
@@ -615,8 +615,8 @@ export interface PayloadLockedDocument {
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: 'users';
-    value: number | User;
+    relationTo: 'admins';
+    value: number | Admin;
   };
   updatedAt: string;
   createdAt: string;
@@ -628,8 +628,8 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: number;
   user: {
-    relationTo: 'users';
-    value: number | User;
+    relationTo: 'admins';
+    value: number | Admin;
   };
   key?: string | null;
   value?:
@@ -885,9 +885,9 @@ export interface RestaurantMenuSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "admins_select".
  */
-export interface UsersSelect<T extends boolean = true> {
+export interface AdminsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   email?: T;

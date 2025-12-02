@@ -2,7 +2,7 @@ import { Payload, GlobalConfig, CollectionConfig } from "payload";
 import Faq from "./faq";
 import Blog from "./blog";
 import Team from "./team";
-import Users from "./users";
+import Admins from "./admins";
 import Media from "./media";
 import Events from "./events";
 import Settings from "./settings";
@@ -22,7 +22,7 @@ export type Feature = {
   seeds: Seed[];
 };
 
-const mandatoryFeatures = [Users, Media, Settings];
+const mandatoryFeatures = [Admins, Media, Settings];
 
 const features = [
   Faq,

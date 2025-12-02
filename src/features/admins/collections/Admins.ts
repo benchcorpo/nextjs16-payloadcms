@@ -1,9 +1,9 @@
 import type { CollectionConfig } from "payload";
 
-import i18n from "../i18n/users.json";
+import i18n from "../i18n/admins.json";
 
-export const Users: CollectionConfig = {
-  slug: "users",
+export const Admins: CollectionConfig = {
+  slug: "admins",
   auth: true,
   admin: {
     useAsTitle: "email",
