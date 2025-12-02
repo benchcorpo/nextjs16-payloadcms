@@ -1,7 +1,7 @@
 "use server";
 
 import { getPayload } from "payload";
-import type { PaginatedDocs } from "payload";
+import type { PaginatedDocs, Where } from "payload";
 import configPromise from "@/src/payload.config";
 import type { BlogPost, BlogAuthor, BlogCategory } from "@/src/payload-types";
 
@@ -18,7 +18,7 @@ export async function getBlogPosts(options?: {
 }): Promise<PaginatedDocs<BlogPost>> {
     const payload = await getPayload({ config: configPromise });
 
-    const where: any = {};
+    const where: Where = {};
 
     if (options?.category) {
         where["category.slug"] = { equals: options.category };
