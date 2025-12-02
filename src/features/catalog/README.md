@@ -21,25 +21,23 @@ Get a single catalog item by slug.
 - **Parameters**: `slug` (string)
 - **Returns**: `Promise<CatalogItem | null>`
 
-### `getCatalogCategories(): Promise<CatalogCategory[]>`
-
-Get all catalog categories (including nested ones).
-
 ### `getRootCatalogCategories(): Promise<CatalogCategory[]>`
 
 Get root catalog categories (categories without parents).
-
-### `getCatalogCategory(slug: string): Promise<CatalogCategory | null>`
-
-Get a single catalog category by slug.
 
 ### `getCatalogSubCategories(parentSlug: string): Promise<CatalogCategory[]>`
 
 Get subcategories of a specific category.
 
-### `getItemsByCategory(categorySlug: string, limit?: number): Promise<CatalogItem[]>`
+- **Parameters**: `parentSlug` (string)
+- **Returns**: `Promise<CatalogCategory[]>`
 
-Get catalog items for a specific category.
+### `getCatalogCategory(slug: string): Promise<CatalogCategory | null>`
+
+Get a single catalog category by slug.
+
+- **Parameters**: `slug` (string)
+- **Returns**: `Promise<CatalogCategory | null>`
 
 ## UI Components to Create
 
@@ -60,7 +58,7 @@ Get catalog items for a specific category.
 **View**: Category List
 - **Purpose**: List items in a specific category
 - **Placement**: Dedicated page.
-- **Data Source**: `getItemsByCategory(slug)` (or `getCatalogItems` with category filter)
+- **Data Source**: `getCatalogItems({ category: slug })`
 
 ### Components
 
@@ -72,7 +70,7 @@ Get catalog items for a specific category.
 **Component**: `CategoryNav`
 - **Purpose**: Navigation through categories and subcategories
 - **Props**: `{ categories: CatalogCategory[] }`
-- **Data Source**: `getRootCatalogCategories()` + `getCatalogSubCategories()`
+- **Data Source**: `getRootCatalogCategories()` + `getCatalogSubCategories(parentSlug)`
 
 ## Data Display Guidelines
 

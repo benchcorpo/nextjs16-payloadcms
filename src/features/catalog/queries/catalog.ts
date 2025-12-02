@@ -55,21 +55,6 @@ export async function getCatalogItem(slug: string): Promise<CatalogItem | null> 
 }
 
 /**
- * Get all catalog categories (including nested ones)
- */
-export async function getCatalogCategories(): Promise<CatalogCategory[]> {
-    const payload = await getPayload({ config: configPromise });
-
-    const { docs } = await payload.find({
-        collection: "catalog-categories",
-        sort: "order",
-        depth: 1,
-    });
-
-    return docs;
-}
-
-/**
  * Get root catalog categories (categories without parents)
  */
 export async function getRootCatalogCategories(): Promise<CatalogCategory[]> {
@@ -131,9 +116,3 @@ export async function getCatalogCategory(slug: string): Promise<CatalogCategory 
     return docs[0] || null;
 }
 
-/**
- * Get items by category slug
- */
-export async function getItemsByCategory(categorySlug: string, limit = 10): Promise<CatalogItem[]> {
-    return getCatalogItems({ category: categorySlug, limit });
-}
