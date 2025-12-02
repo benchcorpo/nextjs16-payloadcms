@@ -28,7 +28,6 @@ export const BlogCategories: CollectionConfig = {
               type: "text",
               label: i18n.fields.name,
               required: true,
-              unique: true,
             },
             {
               name: "description",

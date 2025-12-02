@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { faker } from "@faker-js/faker";
 import { seedAsset } from "@/src/utils/seed";
 import { createRichTextParagraphs } from "@/src/utils/lexical";
+import { toSlug } from "@/src/fields/SlugField";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +23,7 @@ export async function seedProducts(payload: Payload) {
     // Create 3 root categories
     for (let i = 0; i < 3; i++) {
         const name = faker.commerce.department();
-        const slug = faker.helpers.slugify(name).toLowerCase();
+        const slug = toSlug(name);
 
         const existing = await payload.find({
             collection: "product-categories",
@@ -51,7 +52,7 @@ export async function seedProducts(payload: Payload) {
         // Create 2 subcategories for each root category
         for (let j = 0; j < 2; j++) {
             const subName = `${name} - ${faker.commerce.productAdjective()}`;
-            const subSlug = faker.helpers.slugify(subName).toLowerCase();
+            const subSlug = toSlug(subName);
 
             const existingSub = await payload.find({
                 collection: "product-categories",
@@ -83,7 +84,7 @@ export async function seedProducts(payload: Payload) {
     let createdProducts = 0;
     for (let i = 0; i < 20; i++) {
         const name = faker.commerce.productName();
-        const slug = faker.helpers.slugify(name).toLowerCase();
+        const slug = toSlug(name);
 
         const existing = await payload.find({
             collection: "product-items",

@@ -1,14 +1,15 @@
 import { Payload } from "payload";
 import { faker } from "@faker-js/faker";
 import { createRichText } from "@/src/utils/lexical";
+import { toSlug } from "@/src/fields/SlugField";
 
 export async function seedFAQ(payload: Payload) {
   console.log("🌱 Seeding FAQ...");
 
-  const categories = ["General", "Pricing", "Technical", "Support"];
+  const categories = ["General", "Billing", "Account", "Technical"];
 
   for (let i = 0; i < categories.length; i++) {
-    const slug = faker.helpers.slugify(categories[i]).toLowerCase();
+    const slug = toSlug(categories[i]);
 
     const existing = await payload.find({
       collection: "faq",

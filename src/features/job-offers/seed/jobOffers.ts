@@ -1,6 +1,7 @@
 import { Payload } from "payload";
 import { faker } from "@faker-js/faker";
 import { createRichTextParagraphs } from "@/src/utils/lexical";
+import { toSlug } from "@/src/fields/SlugField";
 
 export async function seedJobOffers(payload: Payload) {
   console.log("🌱 Seeding job offers...");
@@ -8,7 +9,7 @@ export async function seedJobOffers(payload: Payload) {
   let createdOffers = 0;
   for (let i = 0; i < 8; i++) {
     const title = faker.person.jobTitle();
-    const slug = faker.helpers.slugify(title).toLowerCase();
+    const slug = toSlug(title);
 
     const existing = await payload.find({
       collection: "job-offers",

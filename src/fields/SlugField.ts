@@ -1,7 +1,9 @@
 import type { TextField } from "payload";
 
-const toSlug = (str: string): string =>
+export const toSlug = (str: string): string =>
   str
+    .normalize("NFD") // Split accents from letters
+    .replace(/[\u0300-\u036f]/g, "") // Remove accents
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
@@ -18,14 +20,15 @@ export const SlugField = (fromField: string): TextField => ({
   hooks: {
     beforeValidate: [
       ({ data, value }) => {
-        let slug = value as string | undefined;
+        // If value is already present, return it as-is (validation will check format)
+        if (value) return value;
 
-        if ((!slug || slug === "") && fromField && data?.[fromField]) {
-          slug = String(data[fromField]);
+        // If missing, generate from source field
+        if (fromField && data?.[fromField]) {
+          return toSlug(String(data[fromField]));
         }
 
-        if (!slug) return slug;
-        return toSlug(slug);
+        return value;
       },
     ],
   },
@@ -33,7 +36,7 @@ export const SlugField = (fromField: string): TextField => ({
   validate: (value) => {
     if (!value) return true;
     return (
-      /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ||
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value as string) ||
       "invalid slug format - format slug invalide"
     );
   },

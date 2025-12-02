@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { faker } from "@faker-js/faker";
 import { seedAsset } from "@/src/utils/seed";
 import { createRichTextParagraphs } from "@/src/utils/lexical";
+import { toSlug } from "@/src/fields/SlugField";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +26,7 @@ export async function seedEvents(payload: Payload) {
     );
 
     const title = faker.lorem.sentence();
-    const slug = faker.helpers.slugify(title).toLowerCase();
+    const slug = toSlug(title);
 
     const existing = await payload.find({
       collection: "events",

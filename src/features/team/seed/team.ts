@@ -3,6 +3,7 @@ import { Payload } from "payload";
 import { fileURLToPath } from "url";
 import { faker } from "@faker-js/faker";
 import { seedAsset } from "@/src/utils/seed";
+import { toSlug } from "@/src/fields/SlugField";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,10 +13,10 @@ export async function seedTeam(payload: Payload) {
 
   const teamMemberImage = await seedAsset(payload, __dirname, "team-member-placeholder.png", "Team Member Placeholder");
 
-  const departments = ["Leadership", "Engineering", "Sales", "Marketing"];
+  const departments = ["Management", "Engineering", "Design", "Marketing"];
 
   for (let i = 0; i < departments.length; i++) {
-    const slug = faker.helpers.slugify(departments[i]).toLowerCase();
+    const slug = toSlug(departments[i]);
 
     const existing = await payload.find({
       collection: "team",

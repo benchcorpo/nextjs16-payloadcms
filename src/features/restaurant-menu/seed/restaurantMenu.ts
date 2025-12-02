@@ -3,6 +3,7 @@ import { Payload } from "payload";
 import { fileURLToPath } from "url";
 import { faker } from "@faker-js/faker";
 import { seedAsset } from "@/src/utils/seed";
+import { toSlug } from "@/src/fields/SlugField";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,11 +13,11 @@ export async function seedRestaurantMenu(payload: Payload) {
 
   const menuItemImage = await seedAsset(payload, __dirname, "menu-item-placeholder.png", "Menu Item Placeholder");
 
-  const categories = ["Appetizers", "Main Courses", "Desserts", "Beverages"];
+  const categories = ["Starters", "Mains", "Desserts", "Drinks", "Specials"];
   const spicyLevels = ["none", "mild", "medium", "hot", "extra-hot"] as const;
 
   for (let i = 0; i < categories.length; i++) {
-    const slug = faker.helpers.slugify(categories[i]).toLowerCase();
+    const slug = toSlug(categories[i]);
 
     const existing = await payload.find({
       collection: "restaurant-menu",

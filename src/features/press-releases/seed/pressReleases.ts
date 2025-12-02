@@ -1,6 +1,7 @@
 import { Payload } from "payload";
 import { faker } from "@faker-js/faker";
 import { createRichText } from "@/src/utils/lexical";
+import { toSlug } from "@/src/fields/SlugField";
 
 export async function seedPressReleases(payload: Payload) {
   console.log("🌱 Seeding press releases...");
@@ -8,7 +9,7 @@ export async function seedPressReleases(payload: Payload) {
   let createdReleases = 0;
   for (let i = 0; i < 10; i++) {
     const title = faker.lorem.sentence();
-    const slug = faker.helpers.slugify(title).toLowerCase();
+    const slug = toSlug(title);
 
     const existing = await payload.find({
       collection: "press-releases",
