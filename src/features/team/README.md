@@ -17,7 +17,7 @@ Get all team groups, including their members.
 Get a single team group by its slug.
 
 - **Use Case**: Display a specific team group (e.g., "Leadership") on a specific page (e.g., Home page) without showing the whole team.
-- **Parameters**: 
+- **Parameters**:
   - `slug`: The unique slug of the team group
 - **Returns**: `Promise<Team | null>` - Team object or null
 
@@ -26,12 +26,14 @@ Get a single team group by its slug.
 ### Pages / Sections
 
 **View**: Team List
+
 - **Purpose**: Display all team members, organized by group
 - **Placement**: Dedicated page OR section on About page.
 - **Data Source**: `getTeamGroups()`
 - **Layout**: Stack of sections, one for each group. Each section contains a grid of member cards.
 
 **View**: Specific Team Section
+
 - **Purpose**: Display members of a single group
 - **Placement**: Any relevant page (e.g., "Our Chefs" on the Menu page).
 - **Data Source**: `getTeamGroup(slug)`
@@ -39,6 +41,7 @@ Get a single team group by its slug.
 ### Components
 
 **Component**: `TeamGrid`
+
 - **Purpose**: Display a single group of team members
 - **Props**: `{ group: Team }`
 - **Structure**:
@@ -46,6 +49,7 @@ Get a single team group by its slug.
   - Grid: Loop through `group.items` and render `TeamMemberCard`
 
 **Component**: `TeamMemberCard`
+
 - **Purpose**: Display individual member details
 - **Props**: `{ member: NonNullable<Team['items']>[number] }`
 - **Must Include**:

@@ -29,7 +29,7 @@ export async function seedFAQ(payload: Payload) {
             () => ({
               question: faker.lorem.sentence() + "?",
               answer: createRichText(faker.lorem.paragraph()),
-            })
+            }),
           ),
         },
       });

@@ -1,48 +1,48 @@
 {
-    "label": {
-        "en": "Opening Hours",
-        "fr": "Horaires d'ouverture"
+  "label": {
+    "en": "Opening Hours",
+    "fr": "Horaires d'ouverture"
+  },
+  "fields": {
+    "monday": {
+      "en": "Monday",
+      "fr": "Lundi"
     },
-    "fields": {
-        "monday": {
-            "en": "Monday",
-            "fr": "Lundi"
-        },
-        "tuesday": {
-            "en": "Tuesday",
-            "fr": "Mardi"
-        },
-        "wednesday": {
-            "en": "Wednesday",
-            "fr": "Mercredi"
-        },
-        "thursday": {
-            "en": "Thursday",
-            "fr": "Jeudi"
-        },
-        "friday": {
-            "en": "Friday",
-            "fr": "Vendredi"
-        },
-        "saturday": {
-            "en": "Saturday",
-            "fr": "Samedi"
-        },
-        "sunday": {
-            "en": "Sunday",
-            "fr": "Dimanche"
-        },
-        "openTime": {
-            "en": "Open Time",
-            "fr": "Heure d'ouverture"
-        },
-        "closeTime": {
-            "en": "Close Time",
-            "fr": "Heure de fermeture"
-        },
-        "isOpen": {
-            "en": "Open",
-            "fr": "Ouvert"
-        }
+    "tuesday": {
+      "en": "Tuesday",
+      "fr": "Mardi"
+    },
+    "wednesday": {
+      "en": "Wednesday",
+      "fr": "Mercredi"
+    },
+    "thursday": {
+      "en": "Thursday",
+      "fr": "Jeudi"
+    },
+    "friday": {
+      "en": "Friday",
+      "fr": "Vendredi"
+    },
+    "saturday": {
+      "en": "Saturday",
+      "fr": "Samedi"
+    },
+    "sunday": {
+      "en": "Sunday",
+      "fr": "Dimanche"
+    },
+    "openTime": {
+      "en": "Open Time",
+      "fr": "Heure d'ouverture"
+    },
+    "closeTime": {
+      "en": "Close Time",
+      "fr": "Heure de fermeture"
+    },
+    "isOpen": {
+      "en": "Open",
+      "fr": "Ouvert"
     }
+  }
 }

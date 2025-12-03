@@ -4,9 +4,9 @@ import { CatalogCategories } from "./collections/CatalogCategories";
 import { CatalogItems } from "./collections/CatalogItems";
 
 const feature: Feature = {
-    globals: [],
-    collections: [CatalogCategories, CatalogItems],
-    seeds: [seedCatalog],
+  globals: [],
+  collections: [CatalogCategories, CatalogItems],
+  seeds: [seedCatalog],
 };
 
 export default feature;

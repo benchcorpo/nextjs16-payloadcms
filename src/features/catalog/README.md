@@ -10,7 +10,7 @@ The Catalog feature manages catalog categories and items. It allows displaying a
 
 Get a list of catalog items with optional filtering and pagination.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; category?: string; }`
 - **Returns**: `Promise<PaginatedDocs<CatalogItem>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
 
@@ -44,18 +44,21 @@ Get a single catalog category by slug.
 ### Pages / Sections
 
 **View**: Catalog List
+
 - **Purpose**: List catalog items
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getCatalogItems()`
 - **Layout**: Grid of item cards. Optional sidebar with categories.
 
 **View**: Catalog Detail
+
 - **Purpose**: Display full catalog item
 - **Placement**: Dedicated page.
 - **Data Source**: `getCatalogItem(slug)`
 - **Layout**: Gallery, title, price, specifications, and rich text description.
 
 **View**: Category List
+
 - **Purpose**: List items in a specific category
 - **Placement**: Dedicated page.
 - **Data Source**: `getCatalogItems({ category: slug })`
@@ -63,11 +66,13 @@ Get a single catalog category by slug.
 ### Components
 
 **Component**: `CatalogCard`
+
 - **Purpose**: Preview of a catalog item
 - **Props**: `{ item: CatalogItem }`
 - **Must Include**: Image, Name, Price, Category.
 
 **Component**: `CategoryNav`
+
 - **Purpose**: Navigation through categories and subcategories
 - **Props**: `{ categories: CatalogCategory[] }`
 - **Data Source**: `getRootCatalogCategories()` + `getCatalogSubCategories(parentSlug)`

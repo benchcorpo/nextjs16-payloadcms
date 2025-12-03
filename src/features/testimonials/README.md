@@ -10,7 +10,7 @@ The Testimonials feature manages client reviews and feedback.
 
 Get all testimonials with pagination.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; sort?: string; }`
   - `sort`: Sort order (default: `"-date"`)
 - **Returns**: `Promise<PaginatedDocs<Testimonial>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
@@ -20,6 +20,7 @@ Get all testimonials with pagination.
 ### Pages / Sections
 
 **View**: Testimonials List
+
 - **Purpose**: List all testimonials
 - **Placement**: Dedicated page OR section on Home/About page.
 - **Data Source**: `getTestimonials()`
@@ -28,6 +29,7 @@ Get all testimonials with pagination.
 ### Components
 
 **Component**: `TestimonialCard`
+
 - **Purpose**: Display a single testimonial
 - **Props**: `{ testimonial: Testimonial }`
 - **Must Include**: Quote, Client Name, Company (if available), Rating (stars), Photo (if available).

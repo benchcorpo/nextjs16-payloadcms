@@ -33,7 +33,9 @@ describe("Blog queries", () => {
     });
 
     it("filters by non-existent category returning empty docs", async () => {
-      const result = await getBlogPosts({ category: "non-existent-category-slug" });
+      const result = await getBlogPosts({
+        category: "non-existent-category-slug",
+      });
       expect(result.docs).toEqual([]);
     });
 

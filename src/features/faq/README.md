@@ -17,7 +17,7 @@ Get all FAQ groups, including their questions and answers.
 Get a single FAQ group by its slug.
 
 - **Use Case**: Display a specific set of questions (e.g., "Shipping") on a relevant page (e.g., Cart or Checkout) or section.
-- **Parameters**: 
+- **Parameters**:
   - `slug`: The unique slug of the FAQ group
 - **Returns**: `Promise<Faq | null>` - Faq object or null
 
@@ -26,12 +26,14 @@ Get a single FAQ group by its slug.
 ### Pages / Sections
 
 **View**: FAQ List
+
 - **Purpose**: Display all FAQs, organized by group
 - **Placement**: Dedicated page OR section on Home/Contact/Support page.
 - **Data Source**: `getFAQGroups()`
 - **Layout**: Stack of sections, one for each group. Each section contains an accordion or list of questions.
 
 **View**: Specific FAQ Section
+
 - **Purpose**: Display questions from a single group
 - **Placement**: Any relevant page (e.g., "Returns" FAQs on the Returns page).
 - **Data Source**: `getFAQGroup(slug)`
@@ -39,6 +41,7 @@ Get a single FAQ group by its slug.
 ### Components
 
 **Component**: `FaqAccordion`
+
 - **Purpose**: Display a list of questions and answers with expand/collapse functionality
 - **Props**: `{ items: NonNullable<Faq['items']> }`
 - **Structure**:

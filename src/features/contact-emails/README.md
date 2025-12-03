@@ -10,7 +10,7 @@ The Contact Emails feature allows website visitors to send messages through a co
 
 Creates a Server Action for contact form submissions compatible with `useActionState`.
 
-- **Parameters**: 
+- **Parameters**:
   - `generateEmailHtml: (data: ContactFormData) => string` - Function that generates the HTML email template from validated form data
     - `data.name: string` - Sender's name
     - `data.email: string` - Sender's email
@@ -29,61 +29,64 @@ Creates a Server Action for contact form submissions compatible with `useActionS
     - Initial: `{}`
 
 - **Example**:
+
 ```tsx
 // 1. Create server action (app/(frontend)/contact/actions.ts)
 "use server";
 import { createContactFormAction } from "@/src/features/contact-emails/mutations/contact";
 
-export const submitContact = createContactFormAction((data) => `
+export const submitContact = createContactFormAction(
+  (data) => `
     <h2>New Contact from ${data.name}</h2>
     <p><strong>Email:</strong> ${data.email}</p>
-    ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
+    ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ""}
     <p><strong>Subject:</strong> ${data.subject}</p>
     <p><strong>Message:</strong></p>
-    <p>${data.message.replace(/\n/g, '<br/>')}</p>
-`);
+    <p>${data.message.replace(/\n/g, "<br/>")}</p>
+`,
+);
 
 // 2. Use in form component (app/(frontend)/contact/ContactForm.tsx)
-"use client";
+("use client");
 import { useActionState } from "react";
 import { submitContact } from "./actions";
 import { contactFormSchema } from "@/src/features/contact-emails/mutations/schema";
 
 export function ContactForm() {
-    const [state, formAction, isPending] = useActionState(submitContact, {});
+  const [state, formAction, isPending] = useActionState(submitContact, {});
 
-    return (
-        <form action={formAction}>
-            <input name="name" required />
-            {state.success === false && state.fieldErrors?.name && (
-                <p>{state.fieldErrors.name[0]}</p>
-            )}
-            
-            <input name="email" type="email" required />
-            {state.success === false && state.fieldErrors?.email && (
-                <p>{state.fieldErrors.email[0]}</p>
-            )}
-            
-            <input name="phone" />
-            
-            <input name="subject" required />
-            {state.success === false && state.fieldErrors?.subject && (
-                <p>{state.fieldErrors.subject[0]}</p>
-            )}
-            
-            <textarea name="message" required />
-            {state.success === false && state.fieldErrors?.message && (
-                <p>{state.fieldErrors.message[0]}</p>
-            )}
-            
-            <button type="submit" disabled={isPending}>
-                {isPending ? "Sending..." : "Send Message"}
-            </button>
-            
-            {state.success === false && state.error && <p>{state.error}</p>}
-            {state.success === true && <p>Message sent successfully!</p>}
-        </form>
-    );
+  return (
+    <form action={formAction}>
+      <input name="name" required />
+      {state.success === false && state.fieldErrors?.name && (
+        <p>{state.fieldErrors.name[0]}</p>
+      )}
+
+      <input name="email" type="email" required />
+      {state.success === false && state.fieldErrors?.email && (
+        <p>{state.fieldErrors.email[0]}</p>
+      )}
+
+      <input name="phone" />
+
+      <input name="subject" required />
+      {state.success === false && state.fieldErrors?.subject && (
+        <p>{state.fieldErrors.subject[0]}</p>
+      )}
+
+      <textarea name="message" required />
+      {state.success === false && state.fieldErrors?.message && (
+        <p>{state.fieldErrors.message[0]}</p>
+      )}
+
+      <button type="submit" disabled={isPending}>
+        {isPending ? "Sending..." : "Send Message"}
+      </button>
+
+      {state.success === false && state.error && <p>{state.error}</p>}
+      {state.success === true && <p>Message sent successfully!</p>}
+    </form>
+  );
 }
 ```
 
@@ -92,9 +95,10 @@ export function ContactForm() {
 ### Pages / Sections
 
 **View**: Contact Page
+
 - **Purpose**: Display contact information and a contact form
 - **Placement**: Dedicated page.
-- **Data Source**: 
+- **Data Source**:
   - Settings global (for contact info, address, phone, email)
   - `createContactFormAction` mutation (for form submission)
 - **Layout**: Two-column layout (contact info + form)
@@ -103,6 +107,7 @@ export function ContactForm() {
 ### Components
 
 **Component**: `ContactForm`
+
 - **Purpose**: Contact form with validation and submission handling
 - **Props**: None (can optionally accept settings for pre-filling)
 - **Must Include**:
@@ -115,7 +120,7 @@ export function ContactForm() {
   - Loading state during submission (via `isPending`)
   - Success message after submission
   - Error display for validation failures
-- **Special Notes**: 
+- **Special Notes**:
   - Must use `"use client"` directive (form interactivity required)
   - Import and use `contactFormSchema` for validation if needed
   - Create server action file with custom email template
@@ -161,13 +166,13 @@ const emailHtml = `
         <div class="field">
             <span class="label">Email:</span> ${data.email}
         </div>
-        ${data.phone ? `<div class="field"><span class="label">Phone:</span> ${data.phone}</div>` : ''}
+        ${data.phone ? `<div class="field"><span class="label">Phone:</span> ${data.phone}</div>` : ""}
         <div class="field">
             <span class="label">Subject:</span> ${data.subject}
         </div>
         <div class="field">
             <span class="label">Message:</span><br/>
-            ${data.message.replace(/\n/g, '<br/>')}
+            ${data.message.replace(/\n/g, "<br/>")}
         </div>
     </div>
 </body>

@@ -10,11 +10,11 @@ import type { Setting } from "@/src/payload-types";
  * Get application settings (contact info, socials, analytics)
  */
 export async function getSettings(): Promise<Setting> {
-    const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
 
-    const settings = await payload.findGlobal({
-        slug: "settings",
-    });
+  const settings = await payload.findGlobal({
+    slug: "settings",
+  });
 
-    return settings;
+  return settings;
 }

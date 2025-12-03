@@ -29,7 +29,11 @@ describe("Job Offers queries", () => {
     });
 
     it("combines multiple pagination options", async () => {
-      const result = await getActiveJobOffers({ limit: 10, page: 1, sort: "-postedDate" });
+      const result = await getActiveJobOffers({
+        limit: 10,
+        page: 1,
+        sort: "-postedDate",
+      });
       expect(result.limit).toBe(10);
       expect(result.page).toBe(1);
     });
@@ -62,7 +66,11 @@ describe("Job Offers queries", () => {
     });
 
     it("combines multiple pagination options", async () => {
-      const result = await getJobOffers({ limit: 10, page: 1, sort: "-postedDate" });
+      const result = await getJobOffers({
+        limit: 10,
+        page: 1,
+        sort: "-postedDate",
+      });
       expect(result.limit).toBe(10);
       expect(result.page).toBe(1);
     });

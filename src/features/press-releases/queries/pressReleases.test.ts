@@ -29,7 +29,11 @@ describe("Press Releases queries", () => {
     });
 
     it("combines multiple pagination options", async () => {
-      const result = await getPressReleases({ limit: 10, page: 1, sort: "-publishedDate" });
+      const result = await getPressReleases({
+        limit: 10,
+        page: 1,
+        sort: "-publishedDate",
+      });
       expect(result.limit).toBe(10);
       expect(result.page).toBe(1);
     });
@@ -58,7 +62,9 @@ describe("Press Releases queries", () => {
     });
 
     it("handles complex announcement slugs", async () => {
-      const result = await getPressRelease("new-partnership-announcement-acme-corp");
+      const result = await getPressRelease(
+        "new-partnership-announcement-acme-corp",
+      );
       expect(result).toBeNull();
     });
   });

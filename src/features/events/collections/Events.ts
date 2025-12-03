@@ -87,9 +87,7 @@ export const Events: CollectionConfig = {
         },
         {
           label: i18n.tabs.advanced,
-          fields: [
-            SlugField("title"),
-          ],
+          fields: [SlugField("title")],
         },
       ],
     },

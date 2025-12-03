@@ -10,7 +10,7 @@ The Press Releases feature manages company news and announcements.
 
 Get all press releases with pagination.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; sort?: string; }`
   - `sort`: Sort order (default: `"-publishedDate"`)
 - **Returns**: `Promise<PaginatedDocs<PressRelease>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
@@ -27,12 +27,14 @@ Get a single press release by slug.
 ### Pages / Sections
 
 **View**: Press List
+
 - **Purpose**: List press releases
 - **Placement**: Dedicated page OR section on Home/About page.
 - **Data Source**: `getPressReleases()`
 - **Layout**: List of news items.
 
 **View**: Press Detail
+
 - **Purpose**: Display press release details
 - **Placement**: Dedicated page.
 - **Data Source**: `getPressRelease(slug)`
@@ -41,6 +43,7 @@ Get a single press release by slug.
 ### Components
 
 **Component**: `PressReleaseCard`
+
 - **Purpose**: Preview of a press release
 - **Props**: `{ release: PressRelease }`
 - **Must Include**: Title, Date, Image (if available), Excerpt.

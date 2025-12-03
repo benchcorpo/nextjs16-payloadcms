@@ -1,12 +1,12 @@
 {
-    "labels": {
-        "singular": {
-            "en": "Admin",
-            "fr": "Administrateur"
-        },
-        "plural": {
-            "en": "Admins",
-            "fr": "Administrateurs"
-        }
+  "labels": {
+    "singular": {
+      "en": "Admin",
+      "fr": "Administrateur"
+    },
+    "plural": {
+      "en": "Admins",
+      "fr": "Administrateurs"
     }
+  }
 }

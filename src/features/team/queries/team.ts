@@ -10,33 +10,33 @@ import type { Team } from "@/src/payload-types";
  * Get all team groups with their members
  */
 export async function getTeamGroups(): Promise<Team[]> {
-    const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
 
-    const { docs } = await payload.find({
-        collection: "team",
-        sort: "order",
-        depth: 2,
-    });
+  const { docs } = await payload.find({
+    collection: "team",
+    sort: "order",
+    depth: 2,
+  });
 
-    return docs;
+  return docs;
 }
 
 /**
  * Get a single team group by slug
  */
 export async function getTeamGroup(slug: string): Promise<Team | null> {
-    const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
 
-    const { docs } = await payload.find({
-        collection: "team",
-        where: {
-            slug: {
-                equals: slug,
-            },
-        },
-        limit: 1,
-        depth: 2,
-    });
+  const { docs } = await payload.find({
+    collection: "team",
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+    depth: 2,
+  });
 
-    return docs[0] || null;
+  return docs[0] || null;
 }

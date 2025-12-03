@@ -12,7 +12,12 @@ const __dirname = path.dirname(__filename);
 export async function seedEvents(payload: Payload) {
   console.log("🌱 Seeding events...");
 
-  const eventImage = await seedAsset(payload, __dirname, "event-placeholder.png", "Event Placeholder");
+  const eventImage = await seedAsset(
+    payload,
+    __dirname,
+    "event-placeholder.png",
+    "Event Placeholder",
+  );
 
   let createdEvents = 0;
   for (let i = 0; i < 10; i++) {
@@ -21,8 +26,8 @@ export async function seedEvents(payload: Payload) {
       () =>
         new Date(
           startDate.getTime() +
-          faker.number.int({ min: 1, max: 8 }) * 60 * 60 * 1000
-        )
+            faker.number.int({ min: 1, max: 8 }) * 60 * 60 * 1000,
+        ),
     );
 
     const title = faker.lorem.sentence();

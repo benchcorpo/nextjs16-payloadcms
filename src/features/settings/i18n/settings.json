@@ -1,52 +1,52 @@
 {
-    "label": {
-        "en": "Settings",
-        "fr": "Paramètres"
+  "label": {
+    "en": "Settings",
+    "fr": "Paramètres"
+  },
+  "fields": {
+    "contact": {
+      "en": "Contact Information",
+      "fr": "Informations de contact"
     },
-    "fields": {
-        "contact": {
-            "en": "Contact Information",
-            "fr": "Informations de contact"
-        },
-        "email": {
-            "en": "Email",
-            "fr": "Email"
-        },
-        "phone": {
-            "en": "Phone Number",
-            "fr": "Numéro de téléphone"
-        },
-        "address": {
-            "en": "Address",
-            "fr": "Adresse"
-        },
-        "socials": {
-            "en": "Social Media",
-            "fr": "Réseaux sociaux"
-        },
-        "facebook": {
-            "en": "Facebook URL",
-            "fr": "URL Facebook"
-        },
-        "instagram": {
-            "en": "Instagram URL",
-            "fr": "URL Instagram"
-        },
-        "linkedin": {
-            "en": "LinkedIn URL",
-            "fr": "URL LinkedIn"
-        },
-        "twitter": {
-            "en": "Twitter URL",
-            "fr": "URL Twitter"
-        },
-        "settings": {
-            "en": "Settings",
-            "fr": "Paramètres"
-        },
-        "googleAnalyticsId": {
-            "en": "Google Analytics ID",
-            "fr": "ID Google Analytics"
-        }
+    "email": {
+      "en": "Email",
+      "fr": "Email"
+    },
+    "phone": {
+      "en": "Phone Number",
+      "fr": "Numéro de téléphone"
+    },
+    "address": {
+      "en": "Address",
+      "fr": "Adresse"
+    },
+    "socials": {
+      "en": "Social Media",
+      "fr": "Réseaux sociaux"
+    },
+    "facebook": {
+      "en": "Facebook URL",
+      "fr": "URL Facebook"
+    },
+    "instagram": {
+      "en": "Instagram URL",
+      "fr": "URL Instagram"
+    },
+    "linkedin": {
+      "en": "LinkedIn URL",
+      "fr": "URL LinkedIn"
+    },
+    "twitter": {
+      "en": "Twitter URL",
+      "fr": "URL Twitter"
+    },
+    "settings": {
+      "en": "Settings",
+      "fr": "Paramètres"
+    },
+    "googleAnalyticsId": {
+      "en": "Google Analytics ID",
+      "fr": "ID Google Analytics"
     }
+  }
 }

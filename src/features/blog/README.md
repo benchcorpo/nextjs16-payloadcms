@@ -10,7 +10,7 @@ The Blog feature manages blog posts, categories, and authors. It allows displayi
 
 Get a list of blog posts with optional filtering and pagination.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; category?: string; author?: string; sort?: string; }`
   - `sort`: Sort order (default: `"-publishedDate"`)
 - **Returns**: `Promise<PaginatedDocs<BlogPost>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
@@ -51,23 +51,27 @@ Get blog posts for a specific category.
 ### Pages / Sections
 
 **View**: Blog List
+
 - **Purpose**: List recent blog posts
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getBlogPosts()`
 - **Layout**: Grid of post cards. Optional sidebar with categories.
 
 **View**: Blog Detail
+
 - **Purpose**: Display full blog post
 - **Placement**: Dedicated page.
 - **Data Source**: `getBlogPost(slug)`
 - **Layout**: Article layout with header image, title, author info, and rich text content.
 
 **View**: Category List
+
 - **Purpose**: List posts in a specific category
 - **Placement**: Dedicated page.
 - **Data Source**: `getBlogPostsByCategory(slug)` (or `getBlogPosts` with category filter)
 
 **View**: Author List
+
 - **Purpose**: List posts by a specific author
 - **Placement**: Dedicated page.
 - **Data Source**: `getBlogPostsByAuthor(slug)` (or `getBlogPosts` with author filter)
@@ -75,6 +79,7 @@ Get blog posts for a specific category.
 ### Components
 
 **Component**: `BlogCard`
+
 - **Purpose**: Preview of a blog post
 - **Props**: `{ post: BlogPost }`
 - **Must Include**: Image, Title, Excerpt, Date, Author, Category.

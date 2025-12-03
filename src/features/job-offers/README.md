@@ -10,7 +10,7 @@ The Job Offers feature manages job listings. It allows displaying a list of acti
 
 Get all active job offers with pagination.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; sort?: string; }`
   - `sort`: Sort order (default: `"-postedDate"`)
 - **Returns**: `Promise<PaginatedDocs<JobOffer>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
@@ -19,7 +19,7 @@ Get all active job offers with pagination.
 
 Get all job offers (including inactive) with pagination.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; sort?: string; }`
   - `sort`: Sort order (default: `"-postedDate"`)
 - **Returns**: `Promise<PaginatedDocs<JobOffer>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
@@ -36,12 +36,14 @@ Get a single job offer by slug.
 ### Pages / Sections
 
 **View**: Job List
+
 - **Purpose**: List open positions
 - **Placement**: Dedicated page OR section on About/Careers page.
 - **Data Source**: `getActiveJobOffers()`
 - **Layout**: List of job cards or simple list.
 
 **View**: Job Detail
+
 - **Purpose**: Display job details
 - **Placement**: Dedicated page.
 - **Data Source**: `getJobOffer(slug)`
@@ -50,6 +52,7 @@ Get a single job offer by slug.
 ### Components
 
 **Component**: `JobCard`
+
 - **Purpose**: Preview of a job offer
 - **Props**: `{ job: JobOffer }`
 - **Must Include**: Title, Location, Type, Salary (if available).

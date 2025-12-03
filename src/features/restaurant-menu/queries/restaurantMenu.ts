@@ -10,33 +10,35 @@ import type { RestaurantMenu } from "@/src/payload-types";
  * Get all menu categories with their dishes
  */
 export async function getMenuCategories(): Promise<RestaurantMenu[]> {
-    const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
 
-    const { docs } = await payload.find({
-        collection: "restaurant-menu",
-        sort: "order",
-        depth: 2,
-    });
+  const { docs } = await payload.find({
+    collection: "restaurant-menu",
+    sort: "order",
+    depth: 2,
+  });
 
-    return docs;
+  return docs;
 }
 
 /**
  * Get a single menu category by slug
  */
-export async function getMenuCategory(slug: string): Promise<RestaurantMenu | null> {
-    const payload = await getPayload({ config: configPromise });
+export async function getMenuCategory(
+  slug: string,
+): Promise<RestaurantMenu | null> {
+  const payload = await getPayload({ config: configPromise });
 
-    const { docs } = await payload.find({
-        collection: "restaurant-menu",
-        where: {
-            slug: {
-                equals: slug,
-            },
-        },
-        limit: 1,
-        depth: 2,
-    });
+  const { docs } = await payload.find({
+    collection: "restaurant-menu",
+    where: {
+      slug: {
+        equals: slug,
+      },
+    },
+    limit: 1,
+    depth: 2,
+  });
 
-    return docs[0] || null;
+  return docs[0] || null;
 }

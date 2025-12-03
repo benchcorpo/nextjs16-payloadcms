@@ -17,7 +17,7 @@ Get all menu categories, including their dishes.
 Get a single menu category by its slug.
 
 - **Use Case**: Display a specific category (e.g., "Beverages" or "Specials") on a specific page or section (e.g., Home page highlight).
-- **Parameters**: 
+- **Parameters**:
   - `slug`: The unique slug of the category
 - **Returns**: `Promise<RestaurantMenu | null>` - RestaurantMenu object or null
 
@@ -26,12 +26,14 @@ Get a single menu category by its slug.
 ### Pages / Sections
 
 **View**: Menu Page
+
 - **Purpose**: Display the full restaurant menu
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getMenuCategories()`
 - **Layout**: Stack of sections, one for each category.
 
 **View**: Specific Menu Section
+
 - **Purpose**: Display dishes from a single category
 - **Placement**: Any relevant page.
 - **Data Source**: `getMenuCategory(slug)`
@@ -39,6 +41,7 @@ Get a single menu category by its slug.
 ### Components
 
 **Component**: `MenuSection`
+
 - **Purpose**: Display a single category of dishes
 - **Props**: `{ category: RestaurantMenu }`
 - **Structure**:
@@ -46,6 +49,7 @@ Get a single menu category by its slug.
   - Grid/List: Loop through `category.items` and render `MenuItem`
 
 **Component**: `MenuItem`
+
 - **Purpose**: Display individual dish details
 - **Props**: `{ item: NonNullable<RestaurantMenu['items']>[number] }`
 - **Must Include**:

@@ -27,10 +27,10 @@ export async function seedPressReleases(payload: Payload) {
             () =>
               faker.company.name() +
               " " +
-              faker.helpers.arrayElement(["News", "Times", "Journal", "Post"])
+              faker.helpers.arrayElement(["News", "Times", "Journal", "Post"]),
           ),
           excerpt: faker.helpers.maybe(() =>
-            createRichText(faker.lorem.paragraph())
+            createRichText(faker.lorem.paragraph()),
           ),
           link: faker.helpers.maybe(() => faker.internet.url()),
           publishedDate: faker.date.past({ years: 1 }).toISOString(),

@@ -54,9 +54,7 @@ export const PressReleases: CollectionConfig = {
         },
         {
           label: i18n.tabs.advanced,
-          fields: [
-            SlugField("title"),
-          ],
+          fields: [SlugField("title")],
         },
       ],
     },

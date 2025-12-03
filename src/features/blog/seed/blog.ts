@@ -12,9 +12,24 @@ const __dirname = path.dirname(__filename);
 export async function seedBlog(payload: Payload) {
   console.log("🌱 Seeding blog...");
 
-  const categoryImage = await seedAsset(payload, __dirname, "blog-category-placeholder.png", "Blog Category Placeholder");
-  const authorImage = await seedAsset(payload, __dirname, "blog-author-placeholder.png", "Blog Author Placeholder");
-  const postImage = await seedAsset(payload, __dirname, "blog-post-placeholder.png", "Blog Post Placeholder");
+  const categoryImage = await seedAsset(
+    payload,
+    __dirname,
+    "blog-category-placeholder.png",
+    "Blog Category Placeholder",
+  );
+  const authorImage = await seedAsset(
+    payload,
+    __dirname,
+    "blog-author-placeholder.png",
+    "Blog Author Placeholder",
+  );
+  const postImage = await seedAsset(
+    payload,
+    __dirname,
+    "blog-post-placeholder.png",
+    "Blog Post Placeholder",
+  );
 
   // Create categories
   const categories = [];
@@ -95,7 +110,7 @@ export async function seedBlog(payload: Payload) {
           title,
           slug,
           content: createRichTextParagraphs(
-            Array.from({ length: 5 }, () => faker.lorem.paragraph())
+            Array.from({ length: 5 }, () => faker.lorem.paragraph()),
           ),
           excerpt: faker.lorem.paragraph(),
           publishedDate: faker.date.past().toISOString(),
@@ -103,9 +118,12 @@ export async function seedBlog(payload: Payload) {
           category: faker.helpers.arrayElement(categories).id,
           featuredImage: postImage?.id,
           tags: faker.helpers.maybe(() =>
-            Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => ({
-              tag: faker.word.noun(),
-            }))
+            Array.from(
+              { length: faker.number.int({ min: 1, max: 3 }) },
+              () => ({
+                tag: faker.word.noun(),
+              }),
+            ),
           ),
         },
       });

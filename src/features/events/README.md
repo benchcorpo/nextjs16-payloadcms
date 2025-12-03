@@ -10,7 +10,7 @@ The Events feature manages upcoming events, workshops, or gatherings. It allows 
 
 Get a list of upcoming events.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; sort?: string; }`
   - `limit`: Maximum number of events to return (default: `10`)
   - `sort`: Sort order (default: `"date"`)
@@ -20,7 +20,7 @@ Get a list of upcoming events.
 
 Get all events (past and future) with pagination support.
 
-- **Parameters**: 
+- **Parameters**:
   - `options`: `{ limit?: number; page?: number; sort?: string; }`
   - `sort`: Sort order (default: `"-date"`)
 - **Returns**: `Promise<PaginatedDocs<Event>>` - Includes `docs`, `totalDocs`, `totalPages`, `page`, `hasNextPage`, `hasPrevPage`
@@ -29,7 +29,7 @@ Get all events (past and future) with pagination support.
 
 Get a single event by its slug.
 
-- **Parameters**: 
+- **Parameters**:
   - `slug`: The unique slug of the event
 - **Returns**: `Promise<Event | null>` - Event object or null if not found
 
@@ -38,12 +38,14 @@ Get a single event by its slug.
 ### Pages / Sections
 
 **View**: Events List
+
 - **Purpose**: List all upcoming events
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getUpcomingEvents()` or `getEvents()`
 - **Layout**: Grid of event cards
 
 **View**: Event Detail
+
 - **Purpose**: Display full details of a specific event
 - **Placement**: Dedicated page.
 - **Data Source**: `getEvent(slug)`
@@ -52,6 +54,7 @@ Get a single event by its slug.
 ### Components
 
 **Component**: `EventCard`
+
 - **Purpose**: Preview summary of an event in a list
 - **Props**: `{ event: Event }`
 - **Must Include**:

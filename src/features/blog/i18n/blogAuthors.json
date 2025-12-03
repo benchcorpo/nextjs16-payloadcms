@@ -1,44 +1,44 @@
 {
-    "labels": {
-        "singular": {
-            "en": "Blog Author",
-            "fr": "Auteur de blog"
-        },
-        "plural": {
-            "en": "Blog Authors",
-            "fr": "Auteurs de blog"
-        }
+  "labels": {
+    "singular": {
+      "en": "Blog Author",
+      "fr": "Auteur de blog"
     },
-    "tabs": {
-        "content": {
-            "en": "Content",
-            "fr": "Contenu"
-        },
-        "advanced": {
-            "en": "Advanced",
-            "fr": "Avancé"
-        }
-    },
-    "fields": {
-        "name": {
-            "en": "Name",
-            "fr": "Nom"
-        },
-        "description": {
-            "en": "Description",
-            "fr": "Description"
-        },
-        "icon": {
-            "en": "Icon",
-            "fr": "Icône"
-        },
-        "slug": {
-            "en": "Slug",
-            "fr": "Slug"
-        },
-        "order": {
-            "en": "Display Order",
-            "fr": "Ordre d'affichage"
-        }
+    "plural": {
+      "en": "Blog Authors",
+      "fr": "Auteurs de blog"
     }
+  },
+  "tabs": {
+    "content": {
+      "en": "Content",
+      "fr": "Contenu"
+    },
+    "advanced": {
+      "en": "Advanced",
+      "fr": "Avancé"
+    }
+  },
+  "fields": {
+    "name": {
+      "en": "Name",
+      "fr": "Nom"
+    },
+    "description": {
+      "en": "Description",
+      "fr": "Description"
+    },
+    "icon": {
+      "en": "Icon",
+      "fr": "Icône"
+    },
+    "slug": {
+      "en": "Slug",
+      "fr": "Slug"
+    },
+    "order": {
+      "en": "Display Order",
+      "fr": "Ordre d'affichage"
+    }
+  }
 }

@@ -11,7 +11,12 @@ const __dirname = path.dirname(__filename);
 export async function seedRestaurantMenu(payload: Payload) {
   console.log("🌱 Seeding restaurant menu...");
 
-  const menuItemImage = await seedAsset(payload, __dirname, "menu-item-placeholder.png", "Menu Item Placeholder");
+  const menuItemImage = await seedAsset(
+    payload,
+    __dirname,
+    "menu-item-placeholder.png",
+    "Menu Item Placeholder",
+  );
 
   const categories = ["Starters", "Mains", "Desserts", "Drinks", "Specials"];
   const spicyLevels = ["none", "mild", "medium", "hot", "extra-hot"] as const;
@@ -45,10 +50,10 @@ export async function seedRestaurantMenu(payload: Payload) {
                   "Vegetarian",
                   "Gluten-free",
                   "Dairy-free",
-                ])
+                ]),
               ),
               spicyLevel: faker.helpers.arrayElement(spicyLevels),
-            })
+            }),
           ),
         },
       });

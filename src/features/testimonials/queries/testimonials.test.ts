@@ -29,7 +29,11 @@ describe("Testimonials queries", () => {
     });
 
     it("combines multiple pagination options", async () => {
-      const result = await getTestimonials({ limit: 10, page: 1, sort: "-date" });
+      const result = await getTestimonials({
+        limit: 10,
+        page: 1,
+        sort: "-date",
+      });
       expect(result.limit).toBe(10);
       expect(result.page).toBe(1);
     });

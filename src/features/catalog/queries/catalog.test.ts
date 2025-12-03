@@ -30,7 +30,9 @@ describe("Catalog queries", () => {
     });
 
     it("filters by non-existent category returning empty docs", async () => {
-      const result = await getCatalogItems({ category: "non-existent-category" });
+      const result = await getCatalogItems({
+        category: "non-existent-category",
+      });
       expect(result.docs).toEqual([]);
     });
 

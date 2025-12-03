@@ -11,19 +11,19 @@ import type { Testimonial } from "@/src/payload-types";
  * Get all testimonials with pagination
  */
 export async function getTestimonials(options?: {
-    limit?: number;
-    page?: number;
-    sort?: string;
+  limit?: number;
+  page?: number;
+  sort?: string;
 }): Promise<PaginatedDocs<Testimonial>> {
-    const payload = await getPayload({ config: configPromise });
+  const payload = await getPayload({ config: configPromise });
 
-    const result = await payload.find({
-        collection: "testimonials",
-        limit: options?.limit || 20,
-        page: options?.page || 1,
-        sort: options?.sort ?? "-date",
-        depth: 1,
-    });
+  const result = await payload.find({
+    collection: "testimonials",
+    limit: options?.limit || 20,
+    page: options?.page || 1,
+    sort: options?.sort ?? "-date",
+    depth: 1,
+  });
 
-    return result;
+  return result;
 }

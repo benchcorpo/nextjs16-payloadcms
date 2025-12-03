@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Create Next App",

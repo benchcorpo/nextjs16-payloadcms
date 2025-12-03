@@ -10,7 +10,12 @@ const __dirname = path.dirname(__filename);
 export async function seedTestimonials(payload: Payload) {
   console.log("🌱 Seeding testimonials...");
 
-  const authorImage = await seedAsset(payload, __dirname, "testimonial-author-placeholder.png", "Testimonial Author Placeholder");
+  const authorImage = await seedAsset(
+    payload,
+    __dirname,
+    "testimonial-author-placeholder.png",
+    "Testimonial Author Placeholder",
+  );
 
   for (let i = 0; i < 12; i++) {
     await payload.create({

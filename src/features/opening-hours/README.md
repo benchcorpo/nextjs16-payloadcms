@@ -17,6 +17,7 @@ Get the opening hours for all days of the week.
 ### Pages / Sections
 
 **View**: Opening Hours Section
+
 - **Purpose**: Display opening hours
 - **Placement**: Section on Contact page, Footer, or Header.
 - **Data Source**: `getOpeningHours()`
@@ -25,6 +26,7 @@ Get the opening hours for all days of the week.
 ### Components
 
 **Component**: `OpeningHoursList`
+
 - **Purpose**: Display the weekly schedule
 - **Props**: `{ hours: OpeningHour }`
 - **Structure**:
@@ -33,6 +35,7 @@ Get the opening hours for all days of the week.
   - Show "Open - Close" times if `isOpen` is true
 
 **Component**: `TodayStatus`
+
 - **Purpose**: Show if currently open/closed
 - **Props**: `{ hours: OpeningHour }`
 - **Logic**: Determine current day and check status
