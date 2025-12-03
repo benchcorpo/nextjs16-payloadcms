@@ -6,80 +6,82 @@ The Contact Emails feature allows website visitors to send messages through a co
 
 ## Mutations (Write Operations)
 
-### `submitContactEmail(data: ContactEmailData): Promise<ContactEmailResult>`
+### `createContactFormAction(generateEmailHtml): ServerAction`
 
-Submits a contact form message.
+Creates a Server Action for contact form submissions compatible with `useActionState`.
 
 - **Parameters**: 
-  - `data: ContactEmailData` - Contact form data object
-    - `name: string` - Sender's name (required, max 100 chars)
-    - `email: string` - Sender's email (required, valid email format)
-    - `phone?: string` - Sender's phone number (optional)
-    - `subject: string` - Message subject (required, max 200 chars)
-    - `message: string` - Message content (required, max 5000 chars)
-    - `emailHtml: string` - HTML template for the email notification (required)
+  - `generateEmailHtml: (data: ContactFormData) => string` - Function that generates the HTML email template from validated form data
+    - `data.name: string` - Sender's name
+    - `data.email: string` - Sender's email
+    - `data.phone?: string` - Sender's phone (optional)
+    - `data.subject: string` - Message subject
+    - `data.message: string` - Message content
 
-- **Validation Schema**: `contactEmailSchema` from `mutations/schema.ts`
+- **Validation Schema**: `contactFormSchema` from `mutations/schema.ts`
   - Use this schema for frontend form validation
   - The schema is exported and can be imported in client components
 
-- **Returns**: `Promise<ContactEmailResult>`
-  - `success: boolean` - Whether submission succeeded
-  - `id?: string | number` - Document ID if successful
-  - `error?: string` - Error message if failed
-  - `validationErrors?: Record<string, string[]>` - Field-level validation errors
+- **Returns**: Server Action compatible with `useActionState`
+  - Returns `ContactFormState` (discriminated union):
+    - Success: `{ success: true; id: string | number }`
+    - Error: `{ success: false; error: string; fieldErrors?: Record<string, string[]> }`
+    - Initial: `{}`
 
 - **Example**:
 ```tsx
+// 1. Create server action (app/(frontend)/contact/actions.ts)
+"use server";
+import { createContactFormAction } from "@/src/features/contact-emails/mutations/contact";
+
+export const submitContact = createContactFormAction((data) => `
+    <h2>New Contact from ${data.name}</h2>
+    <p><strong>Email:</strong> ${data.email}</p>
+    ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
+    <p><strong>Subject:</strong> ${data.subject}</p>
+    <p><strong>Message:</strong></p>
+    <p>${data.message.replace(/\n/g, '<br/>')}</p>
+`);
+
+// 2. Use in form component (app/(frontend)/contact/ContactForm.tsx)
 "use client";
-import { useState } from "react";
-import { submitContactEmail } from "@/src/features/contact-emails/mutations/contact";
-import { contactEmailSchema } from "@/src/features/contact-emails/mutations/schema";
+import { useActionState } from "react";
+import { submitContact } from "./actions";
+import { contactFormSchema } from "@/src/features/contact-emails/mutations/schema";
 
 export function ContactForm() {
-    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-    const [errors, setErrors] = useState<Record<string, string[]>>({});
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        setStatus("loading");
-        setErrors({});
-
-        const formData = new FormData(e.currentTarget);
-        const data = {
-            name: formData.get("name") as string,
-            email: formData.get("email") as string,
-            phone: formData.get("phone") as string,
-            subject: formData.get("subject") as string,
-            message: formData.get("message") as string,
-            emailHtml: `<p><strong>From:</strong> ${formData.get("name")}</p>...`,
-        };
-
-        // Validate with Zod schema
-        const validation = contactEmailSchema.safeParse(data);
-        if (!validation.success) {
-            setErrors(validation.error.flatten().fieldErrors);
-            setStatus("error");
-            return;
-        }
-
-        // Submit to server
-        const result = await submitContactEmail(data);
-        
-        if (result.success) {
-            setStatus("success");
-            e.currentTarget.reset();
-        } else {
-            setStatus("error");
-            if (result.validationErrors) {
-                setErrors(result.validationErrors);
-            }
-        }
-    }
+    const [state, formAction, isPending] = useActionState(submitContact, {});
 
     return (
-        <form onSubmit={handleSubmit}>
-            {/* Form fields */}
+        <form action={formAction}>
+            <input name="name" required />
+            {state.success === false && state.fieldErrors?.name && (
+                <p>{state.fieldErrors.name[0]}</p>
+            )}
+            
+            <input name="email" type="email" required />
+            {state.success === false && state.fieldErrors?.email && (
+                <p>{state.fieldErrors.email[0]}</p>
+            )}
+            
+            <input name="phone" />
+            
+            <input name="subject" required />
+            {state.success === false && state.fieldErrors?.subject && (
+                <p>{state.fieldErrors.subject[0]}</p>
+            )}
+            
+            <textarea name="message" required />
+            {state.success === false && state.fieldErrors?.message && (
+                <p>{state.fieldErrors.message[0]}</p>
+            )}
+            
+            <button type="submit" disabled={isPending}>
+                {isPending ? "Sending..." : "Send Message"}
+            </button>
+            
+            {state.success === false && state.error && <p>{state.error}</p>}
+            {state.success === true && <p>Message sent successfully!</p>}
         </form>
     );
 }
@@ -94,7 +96,7 @@ export function ContactForm() {
 - **Placement**: Dedicated page.
 - **Data Source**: 
   - Settings global (for contact info, address, phone, email)
-  - `submitContactEmail` mutation (for form submission)
+  - `createContactFormAction` mutation (for form submission)
 - **Layout**: Two-column layout (contact info + form)
 - **Special Notes**: This is typically the only page needed for this feature
 
@@ -110,13 +112,13 @@ export function ContactForm() {
   - Subject field (text input)
   - Message field (textarea)
   - Submit button
-  - Loading state during submission
+  - Loading state during submission (via `isPending`)
   - Success message after submission
   - Error display for validation failures
 - **Special Notes**: 
   - Must use `"use client"` directive (form interactivity required)
-  - Import and use `contactEmailSchema` for validation
-  - Build the `emailHtml` string from form data
+  - Import and use `contactFormSchema` for validation if needed
+  - Create server action file with custom email template
 
 ## Data Display Guidelines
 
