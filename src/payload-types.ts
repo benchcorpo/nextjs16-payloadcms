@@ -112,6 +112,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
+  fallbackLocale: null;
   globals: {
     contact: Contact;
     integrations: Integration;
