@@ -13,12 +13,19 @@ import type { OpeningHour } from "@/src/payload-types";
  * This function is cached per-request to prevent redundant database queries
  * when multiple components need opening hours data on the same page.
  */
-export const getOpeningHours = cache(async (): Promise<OpeningHour> => {
+export const getOpeningHours = cache(async (): Promise<OpeningHour | null> => {
   const payload = await getPayload({ config: configPromise });
 
-  const data = await payload.findGlobal({
-    slug: "opening-hours",
+  const { docs } = await payload.find({
+    collection: "opening-hours",
+    where: {
+      startDate: {
+        less_than_equal: new Date().toISOString(),
+      },
+    },
+    sort: "-startDate",
+    limit: 1,
   });
 
-  return data;
+  return docs[0] || null;
 });

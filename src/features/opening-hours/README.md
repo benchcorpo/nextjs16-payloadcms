@@ -6,11 +6,28 @@ The Opening Hours feature manages the business operating hours for each day of t
 
 ## Queries (Read Operations)
 
-### `getOpeningHours(): Promise<OpeningHour>`
+### Data Structure
 
-Get the opening hours for all days of the week.
+The `opening-hours` feature is implemented as a **Collection** with the slug `opening-hours`.
 
-- **Returns**: `Promise<OpeningHour>` - Object containing hours for each day
+### Fields
+
+- **startDate** (date, required): The date from which these opening hours apply. The system will always use the document with the most recent `startDate` that is in the past (or today).
+- **monday** (group)
+  - **open** (text): Opening time (e.g., "09:00")
+  - **close** (text): Closing time (e.g., "18:00")
+  - **isOpen** (checkbox): Whether the place is open on this day
+- **tuesday**... **sunday** (same structure as monday)
+
+## Usage
+
+The feature exposes a `getOpeningHours` function that returns the currently active opening hours based on the server's date.
+
+```typescript
+import { getOpeningHours } from "@/src/features/opening-hours/queries/openingHours";
+
+const openingHours = await getOpeningHours();
+```
 
 ## UI Components to Create
 

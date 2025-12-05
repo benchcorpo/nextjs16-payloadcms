@@ -80,6 +80,7 @@ export interface Config {
     'contact-emails': ContactEmail;
     'job-offers': JobOffer;
     testimonials: Testimonial;
+    'opening-hours': OpeningHour;
     'press-releases': PressRelease;
     'restaurant-menu': RestaurantMenu;
     'payload-kv': PayloadKv;
@@ -102,6 +103,7 @@ export interface Config {
     'contact-emails': ContactEmailsSelect<false> | ContactEmailsSelect<true>;
     'job-offers': JobOffersSelect<false> | JobOffersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'opening-hours': OpeningHoursSelect<false> | OpeningHoursSelect<true>;
     'press-releases': PressReleasesSelect<false> | PressReleasesSelect<true>;
     'restaurant-menu': RestaurantMenuSelect<false> | RestaurantMenuSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -116,13 +118,11 @@ export interface Config {
   globals: {
     contact: Contact;
     socials: Social;
-    'opening-hours': OpeningHour;
     integrations: Integration;
   };
   globalsSelect: {
     contact: ContactSelect<false> | ContactSelect<true>;
     socials: SocialsSelect<false> | SocialsSelect<true>;
-    'opening-hours': OpeningHoursSelect<false> | OpeningHoursSelect<true>;
     integrations: IntegrationsSelect<false> | IntegrationsSelect<true>;
   };
   locale: null;
@@ -484,6 +484,51 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opening-hours".
+ */
+export interface OpeningHour {
+  id: number;
+  startDate: string;
+  monday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  tuesday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  wednesday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  thursday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  friday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  saturday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  sunday?: {
+    open?: string | null;
+    close?: string | null;
+    isOpen?: boolean | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "press-releases".
  */
 export interface PressRelease {
@@ -609,6 +654,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'opening-hours';
+        value: number | OpeningHour;
       } | null)
     | ({
         relationTo: 'press-releases';
@@ -894,6 +943,64 @@ export interface TestimonialsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opening-hours_select".
+ */
+export interface OpeningHoursSelect<T extends boolean = true> {
+  startDate?: T;
+  monday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  tuesday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  wednesday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  thursday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  friday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  saturday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  sunday?:
+    | T
+    | {
+        open?: T;
+        close?: T;
+        isOpen?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "press-releases_select".
  */
 export interface PressReleasesSelect<T extends boolean = true> {
@@ -995,50 +1102,6 @@ export interface Social {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "opening-hours".
- */
-export interface OpeningHour {
-  id: number;
-  monday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  tuesday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  wednesday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  thursday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  friday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  saturday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  sunday?: {
-    open?: string | null;
-    close?: string | null;
-    isOpen?: boolean | null;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "integrations".
  */
 export interface Integration {
@@ -1070,64 +1133,6 @@ export interface SocialsSelect<T extends boolean = true> {
   instagram?: T;
   linkedin?: T;
   twitter?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "opening-hours_select".
- */
-export interface OpeningHoursSelect<T extends boolean = true> {
-  monday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
-  tuesday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
-  wednesday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
-  thursday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
-  friday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
-  saturday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
-  sunday?:
-    | T
-    | {
-        open?: T;
-        close?: T;
-        isOpen?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

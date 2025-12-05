@@ -1,9 +1,9 @@
 import { Feature } from "../config";
 import { seedOpeningHours } from "./seed/openingHours";
-import { OpeningHours } from "./globals/OpeningHours";
+import { OpeningHours } from "./collections/OpeningHours";
 
 export const openingHoursConfig: Feature = {
-  globals: [OpeningHours],
-  collections: [],
+  globals: [],
+  collections: [OpeningHours],
   seeds: [seedOpeningHours],
 };

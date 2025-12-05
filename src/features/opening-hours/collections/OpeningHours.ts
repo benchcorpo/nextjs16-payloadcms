@@ -1,4 +1,4 @@
-import { GlobalConfig, Field } from "payload";
+import { CollectionConfig, Field } from "payload";
 
 import i18n from "../i18n/openingHours.json";
 
@@ -21,13 +21,23 @@ const dayFields: Field[] = [
   },
 ];
 
-export const OpeningHours: GlobalConfig = {
+export const OpeningHours: CollectionConfig = {
   slug: "opening-hours",
   access: {
-    read: ({ req: { user } }) => !!user,
+    read: () => true,
   },
-  label: i18n.label,
+  admin: {
+    useAsTitle: "startDate",
+  },
+  labels: i18n.label,
   fields: [
+    {
+      name: "startDate",
+      type: "date",
+      required: true,
+      label: i18n.fields.startDate,
+      defaultValue: () => new Date(),
+    },
     {
       name: "monday",
       type: "group",

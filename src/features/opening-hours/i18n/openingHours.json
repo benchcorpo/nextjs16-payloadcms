@@ -1,9 +1,19 @@
 {
   "label": {
-    "en": "Opening Hours",
-    "fr": "Horaires d'ouverture"
+    "singular": {
+      "en": "Opening Hours",
+      "fr": "Horaires d'ouverture"
+    },
+    "plural": {
+      "en": "Opening Hours",
+      "fr": "Horaires d'ouverture"
+    }
   },
   "fields": {
+    "startDate": {
+      "en": "Start Date",
+      "fr": "Date de début"
+    },
     "monday": {
       "en": "Monday",
       "fr": "Lundi"
