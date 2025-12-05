@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getUpcomingEvents, getEvents, getEvent } from "./events";
+import { getUpcomingEvents, getEvents, getEvent } from "../queries/events";
 
 describe("Events queries", () => {
   describe("getUpcomingEvents", () => {

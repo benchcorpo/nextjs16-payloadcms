@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getIntegrations } from "./integrations";
+import { getIntegrations } from "../queries/integrations";
 
 describe("Integrations queries", () => {
   describe("getIntegrations", () => {

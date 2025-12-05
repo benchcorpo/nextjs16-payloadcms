@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "tsx src/scripts/seed.ts",
-    "test": "vitest run src/features/**/*"
+    "test": "vitest run src/features/**/test/*"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.64.0",

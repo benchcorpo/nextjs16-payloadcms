@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getMenuCategories, getMenuCategory } from "./restaurantMenu";
+import { getMenuCategories, getMenuCategory } from "../queries/restaurantMenu";
 
 describe("Restaurant Menu queries", () => {
   describe("getMenuCategories", () => {

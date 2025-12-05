@@ -5,7 +5,7 @@ import {
   getRootCatalogCategories,
   getCatalogSubCategories,
   getCatalogCategory,
-} from "./catalog";
+} from "../queries/catalog";
 
 describe("Catalog queries", () => {
   describe("getCatalogItems", () => {

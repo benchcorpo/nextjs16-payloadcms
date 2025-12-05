@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { getActiveJobOffers, getJobOffers, getJobOffer } from "./jobOffers";
+import {
+  getActiveJobOffers,
+  getJobOffers,
+  getJobOffer,
+} from "../queries/jobOffers";
 
 describe("Job Offers queries", () => {
   describe("getActiveJobOffers", () => {

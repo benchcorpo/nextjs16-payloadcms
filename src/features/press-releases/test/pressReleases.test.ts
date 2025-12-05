@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getPressReleases, getPressRelease } from "./pressReleases";
+import { getPressReleases, getPressRelease } from "../queries/pressReleases";
 
 describe("Press Releases queries", () => {
   describe("getPressReleases", () => {

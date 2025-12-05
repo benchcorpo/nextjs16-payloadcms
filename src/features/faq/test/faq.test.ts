@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getFAQGroups, getFAQGroup } from "./faq";
+import { getFAQGroups, getFAQGroup } from "../queries/faq";
 
 describe("FAQ queries", () => {
   describe("getFAQGroups", () => {

@@ -8,7 +8,7 @@ import {
   getBlogCategory,
   getBlogPostsByAuthor,
   getBlogPostsByCategory,
-} from "./blog";
+} from "../queries/blog";
 
 describe("Blog queries", () => {
   describe("getBlogPosts", () => {

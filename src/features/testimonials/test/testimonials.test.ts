@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getTestimonials } from "./testimonials";
+import { getTestimonials } from "../queries/testimonials";
 
 describe("Testimonials queries", () => {
   describe("getTestimonials", () => {

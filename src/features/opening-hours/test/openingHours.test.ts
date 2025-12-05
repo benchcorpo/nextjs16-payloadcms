@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getOpeningHours } from "./openingHours";
+import { getOpeningHours } from "../queries/openingHours";
 
 describe("Opening Hours queries", () => {
   describe("getOpeningHours", () => {

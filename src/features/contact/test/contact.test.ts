@@ -1,5 +1,17 @@
 import { describe, it, expect, vi } from "vitest";
-import { createContactFormAction } from "./contact";
+import { getContact } from "../queries/contact";
+import { createContactFormAction } from "../mutations/contact";
+
+describe("Contact queries", () => {
+  describe("getContact", () => {
+    it("returns contact settings", async () => {
+      const result = await getContact();
+      expect(result).toBeDefined();
+      expect(result.info).toBeDefined();
+      expect(result.socials).toBeDefined();
+    });
+  });
+});
 
 describe("Contact mutations", () => {
   describe("createContactFormAction", () => {
