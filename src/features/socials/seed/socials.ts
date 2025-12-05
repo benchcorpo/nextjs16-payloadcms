@@ -1,6 +1,8 @@
 import { Payload } from "payload";
 
-export const seedSocials = async (payload: Payload) => {
+export async function seedSocials(payload: Payload) {
+  console.log("🌱 Seeding socials...");
+
   await payload.updateGlobal({
     slug: "socials",
     data: {
@@ -10,4 +12,6 @@ export const seedSocials = async (payload: Payload) => {
       twitter: "https://twitter.com",
     },
   });
-};
+
+  console.log("✅ Socials seeded");
+}

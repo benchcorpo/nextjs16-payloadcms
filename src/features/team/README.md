@@ -11,13 +11,13 @@ The Team feature manages groups of team members (e.g., "Management", "Kitchen St
 
 ## Queries (Read Operations)
 
-### `getTeamGroups(): Promise<Team[]>`
+### `getTeamSections(): Promise<Team[]>`
 
 Get all team groups, including their members.
 
 - **Returns**: `Promise<Team[]>` - Array of Team objects (groups)
 
-### `getTeamGroup(slug: string): Promise<Team | null>`
+### `getTeamSection(slug: string): Promise<Team | null>`
 
 Get a single team group by its slug.
 
@@ -34,41 +34,19 @@ Get a single team group by its slug.
 
 - **Purpose**: Display all team members, organized by group
 - **Placement**: Dedicated page OR section on About page.
-- **Data Source**: `getTeamGroups()`
-- **Layout**: Stack of sections, one for each group. Each section contains a grid of member cards.
+- **Data Source**: `getTeamSections()`
 
 **View**: Specific Team Section
 
 - **Purpose**: Display members of a single group
-- **Placement**: Any relevant page (e.g., "Our Chefs" on the Menu page).
-- **Data Source**: `getTeamGroup(slug)`
-
-### Components
-
-**Component**: `TeamGrid`
-
-- **Purpose**: Display a single group of team members
-- **Props**: `{ group: Team }`
-- **Structure**:
-  - Heading: `group.name`
-  - Grid: Loop through `group.items` and render `TeamMemberCard`
-
-**Component**: `TeamMemberCard`
-
-- **Purpose**: Display individual member details
-- **Props**: `{ member: TeamMember }`
-- **Must Include**:
-  - Photo (if available)
-  - Name
-  - Role
-  - Bio (optional)
-  - Social links (LinkedIn, Twitter, etc.)
+- **Placement**: Any relevant page.
+- **Data Source**: `getTeamSection(slug)`
 
 ## Data Display Guidelines
 
-### Team Group (`Team` type)
+### Team Group (`Team`)
 
-- **`name`** (string): The group title (e.g., "Our Chefs").
+- **`name`** (string): Group title.
 - **`items`** (array): List of members.
 - **`order`** (number): Sort order.
 - **`slug`** (string): URL slug.
@@ -78,10 +56,10 @@ Get a single team group by its slug.
 - **`name`** (string): Member's full name.
 - **`role`** (string): Job title.
 - **`photo`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
-- **`bio`** (textarea): Short biography.
-- **`email`** (email): Contact email.
-- **`phone`** (text): Contact phone.
-- **`linkedin`** (text): LinkedIn URL.
-- **`twitter`** (text): Twitter URL.
-- **`facebook`** (text): Facebook URL.
-- **`instagram`** (text): Instagram URL.
+- **`bio`** (textarea): Short biography (optional).
+- **`email`** (email): Contact email (optional).
+- **`phone`** (text): Contact phone (optional).
+- **`linkedin`** (text): LinkedIn URL (optional).
+- **`twitter`** (text): Twitter URL (optional).
+- **`facebook`** (text): Facebook URL (optional).
+- **`instagram`** (text): Instagram URL (optional).

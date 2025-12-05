@@ -44,22 +44,12 @@ Get a single job offer by slug.
 - **Purpose**: List open positions
 - **Placement**: Dedicated page OR section on About/Careers page.
 - **Data Source**: `getActiveJobOffers()`
-- **Layout**: List of job cards or simple list.
 
 **View**: Job Detail
 
 - **Purpose**: Display job details
 - **Placement**: Dedicated page.
 - **Data Source**: `getJobOffer(slug)`
-- **Layout**: Detail view with description and "Apply Now" button (mailto link).
-
-### Components
-
-**Component**: `JobCard`
-
-- **Purpose**: Preview of a job offer
-- **Props**: `{ job: JobOffer }`
-- **Must Include**: Title, Location, Type, Salary (if available).
 
 ## Data Display Guidelines
 
@@ -67,8 +57,8 @@ Get a single job offer by slug.
 
 - **`title`** (string): Job title.
 - **`description`** (richText): Full job description.
-- **`requirements`** (richText): Job requirements list.
-- **`location`** (string): e.g., "Remote", "New York".
+- **`requirements`** (richText): Job requirements.
+- **`location`** (string): Job location.
 - **`applicationLink`** (string): External application URL (optional).
 - **`active`** (checkbox): Status of the offer.
 - **`postedDate`** (date): Date posted.

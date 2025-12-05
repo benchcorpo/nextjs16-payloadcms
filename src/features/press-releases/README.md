@@ -35,30 +35,20 @@ Get a single press release by slug.
 - **Purpose**: List press releases
 - **Placement**: Dedicated page OR section on Home/About page.
 - **Data Source**: `getPressReleases()`
-- **Layout**: List of news items.
 
 **View**: Press Detail
 
 - **Purpose**: Display press release details
 - **Placement**: Dedicated page.
 - **Data Source**: `getPressRelease(slug)`
-- **Layout**: Article layout.
-
-### Components
-
-**Component**: `PressReleaseCard`
-
-- **Purpose**: Preview of a press release
-- **Props**: `{ release: PressRelease }`
-- **Must Include**: Title, Date, Image (if available), Excerpt.
 
 ## Data Display Guidelines
 
 ### Press Release (`PressRelease`)
 
 - **`title`** (string): Headline.
-- **`journal`** (text): Name of the publication.
-- **`excerpt`** (richText): Short summary or snippet.
-- **`link`** (text): URL to the original article.
-- **`publishedDate`** (date): Date of release.
+- **`journal`** (text): Publication name (optional).
+- **`excerpt`** (richText): Short summary (optional).
+- **`link`** (text): URL to original article (optional).
+- **`publishedDate`** (date): Publication date.
 - **`slug`** (string): URL slug.

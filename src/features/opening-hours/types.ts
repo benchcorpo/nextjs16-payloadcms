@@ -3,8 +3,8 @@
  */
 
 export interface DaySchedule {
-  open: string | null;
-  close: string | null;
+  open?: string;
+  close?: string;
   isOpen: boolean;
 }
 

@@ -9,7 +9,7 @@ import type { Faq } from "../types";
 /**
  * Get all FAQ groups with their questions
  */
-export async function getFAQGroups(): Promise<Faq[]> {
+export async function getFAQSections(): Promise<Faq[]> {
   const payload = await getPayload({ config: configPromise });
 
   const { docs } = await payload.find({
@@ -24,7 +24,7 @@ export async function getFAQGroups(): Promise<Faq[]> {
 /**
  * Get a single FAQ group by slug
  */
-export async function getFAQGroup(slug: string): Promise<Faq | null> {
+export async function getFAQSection(slug: string): Promise<Faq | null> {
   const payload = await getPayload({ config: configPromise });
 
   const { docs } = await payload.find({

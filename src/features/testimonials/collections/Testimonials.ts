@@ -27,6 +27,7 @@ export const Testimonials: CollectionConfig = {
               type: "text",
               label: i18n.fields.client,
               required: true,
+              unique: true,
             },
             {
               name: "company",
@@ -51,7 +52,6 @@ export const Testimonials: CollectionConfig = {
               label: i18n.fields.rating,
               min: 1,
               max: 5,
-              defaultValue: 5,
             },
           ],
         },

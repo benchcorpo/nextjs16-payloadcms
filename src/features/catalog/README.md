@@ -54,14 +54,12 @@ Get a single catalog category by slug.
 - **Purpose**: List catalog items
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getCatalogItems()`
-- **Layout**: Grid of item cards. Optional sidebar with categories.
 
 **View**: Catalog Detail
 
 - **Purpose**: Display full catalog item
 - **Placement**: Dedicated page.
 - **Data Source**: `getCatalogItem(slug)`
-- **Layout**: Gallery, title, price, specifications, and rich text description.
 
 **View**: Category List
 
@@ -69,27 +67,13 @@ Get a single catalog category by slug.
 - **Placement**: Dedicated page.
 - **Data Source**: `getCatalogItems({ category: slug })`
 
-### Components
-
-**Component**: `CatalogCard`
-
-- **Purpose**: Preview of a catalog item
-- **Props**: `{ item: CatalogItem }`
-- **Must Include**: Image, Name, Price, Category.
-
-**Component**: `CategoryNav`
-
-- **Purpose**: Navigation through categories and subcategories
-- **Props**: `{ categories: CatalogCategory[] }`
-- **Data Source**: `getRootCatalogCategories()` + `getCatalogSubCategories(parentSlug)`
-
 ## Data Display Guidelines
 
 ### Catalog Item (`CatalogItem`)
 
 - **`name`** (string): Item name.
 - **`gallery`** (upload/Media[]): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
-- **`price`** (number): Price. Format as currency (e.g., "12.50 €").
+- **`price`** (number): Price.
 - **`description`** (richText): Item description.
 - **`categories`** (relationship[]): Associated categories.
 - **`specifications`** (array): List of specs. Each item has `name` and `value` fields.

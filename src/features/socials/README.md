@@ -18,21 +18,19 @@ Get the global social media links.
 
 ## UI Components to Create
 
-### Components
+### Pages / Sections
 
-**Component**: `SocialLinks`
+**View**: Social Links
 
-- **Purpose**: Display social media icons with links.
+- **Purpose**: Display social media links.
 - **Placement**: Footer, Contact Page, or Header.
 - **Data Source**: `getSocials()`
-- **Props**: None (fetches data internally or accepts data as props).
-- **Icons**: Use appropriate icons for each social platform.
 
 ## Data Display Guidelines
 
 ### Social Media (`Socials`)
 
-- **`facebook`** (text): Facebook URL. Display with Facebook icon.
-- **`instagram`** (text): Instagram URL. Display with Instagram icon.
-- **`linkedin`** (text): LinkedIn URL. Display with LinkedIn icon.
-- **`twitter`** (text): Twitter URL. Display with Twitter icon.
+- **`facebook`** (text): Facebook URL (optional).
+- **`instagram`** (text): Instagram URL (optional).
+- **`linkedin`** (text): LinkedIn URL (optional).
+- **`twitter`** (text): Twitter URL (optional).

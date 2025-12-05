@@ -35,6 +35,7 @@ export const OpeningHours: CollectionConfig = {
       name: "startDate",
       type: "date",
       required: true,
+      unique: true,
       label: i18n.fields.startDate,
       defaultValue: () => new Date(),
     },

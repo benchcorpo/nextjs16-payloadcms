@@ -9,7 +9,7 @@ import type { Team } from "../types";
 /**
  * Get all team groups with their members
  */
-export async function getTeamGroups(): Promise<Team[]> {
+export async function getTeamSections(): Promise<Team[]> {
   const payload = await getPayload({ config: configPromise });
 
   const { docs } = await payload.find({
@@ -24,7 +24,7 @@ export async function getTeamGroups(): Promise<Team[]> {
 /**
  * Get a single team group by slug
  */
-export async function getTeamGroup(slug: string): Promise<Team | null> {
+export async function getTeamSection(slug: string): Promise<Team | null> {
   const payload = await getPayload({ config: configPromise });
 
   const { docs } = await payload.find({

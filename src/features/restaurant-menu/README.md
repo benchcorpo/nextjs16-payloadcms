@@ -8,17 +8,17 @@ The Restaurant Menu feature manages menu categories (e.g., "Starters", "Main Cou
 
 - **`RestaurantMenu`**: Menu category with name, slug, order, and list of menu items.
 - **`MenuItem`**: Individual dish with name, description, price, image, dietary info, and spicy level.
-- **`SpicyLevel`**: Type alias for spicy level options ("none" | "mild" | "medium" | "hot" | "extra-hot" | "skull").
+- **`SpicyLevel`**: Type alias for spicy level options ("none" | "mild" | "medium" | "hot" | "extra-hot").
 
 ## Queries (Read Operations)
 
-### `getMenuCategories(): Promise<RestaurantMenu[]>`
+### `getMenuSections(): Promise<RestaurantMenu[]>`
 
 Get all menu categories, including their dishes.
 
 - **Returns**: `Promise<RestaurantMenu[]>` - Array of RestaurantMenu objects (categories)
 
-### `getMenuCategory(slug: string): Promise<RestaurantMenu | null>`
+### `getMenuSection(slug: string): Promise<RestaurantMenu | null>`
 
 Get a single menu category by its slug.
 
@@ -35,40 +35,17 @@ Get a single menu category by its slug.
 
 - **Purpose**: Display the full restaurant menu
 - **Placement**: Dedicated page OR section on Home page.
-- **Data Source**: `getMenuCategories()`
-- **Layout**: Stack of sections, one for each category.
+- **Data Source**: `getMenuSections()`
 
 **View**: Specific Menu Section
 
 - **Purpose**: Display dishes from a single category
 - **Placement**: Any relevant page.
-- **Data Source**: `getMenuCategory(slug)`
-
-### Components
-
-**Component**: `MenuSection`
-
-- **Purpose**: Display a single category of dishes
-- **Props**: `{ category: RestaurantMenu }`
-- **Structure**:
-  - Heading: `category.name`
-  - Grid/List: Loop through `category.items` and render `MenuItem`
-
-**Component**: `MenuItem`
-
-- **Purpose**: Display individual dish details
-- **Props**: `{ item: MenuItem }`
-- **Must Include**:
-  - Name
-  - Description
-  - Price (formatted)
-  - Image (if available)
-  - Dietary info (if available)
-  - Spicy level (if applicable)
+- **Data Source**: `getMenuSection(slug)`
 
 ## Data Display Guidelines
 
-### Menu Category (`RestaurantMenu` type)
+### Menu Category (`RestaurantMenu`)
 
 - **`name`** (string): Category title.
 - **`items`** (array): List of dishes.
@@ -79,7 +56,7 @@ Get a single menu category by its slug.
 
 - **`name`** (string): Dish name.
 - **`description`** (textarea): Dish description.
-- **`price`** (number): Price. Format as currency (e.g., "12.50 €").
+- **`price`** (number): Price.
 - **`image`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
-- **`dietary`** (text): Dietary info (e.g., "Vegetarian", "GF").
-- **`spicyLevel`** (select): "none", "mild", "medium", "hot", "extra-hot". Display as text.
+- **`dietary`** (text): Dietary info (optional).
+- **`spicyLevel`** (select): Spicy level (optional).

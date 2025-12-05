@@ -38,20 +38,25 @@ _Only if applicable._
 
 ### 5. UI Components to Create
 
-List the views and components the agent should build.
+List the views the agent should build.
 
 - **Terminology**: Use **"View"** instead of "Page" to imply flexibility.
 - **Placement**: Explicitly state "Dedicated page OR section on Home/About page" where appropriate.
-- **Code Examples**: Only include code examples for complex form logic, mutations, or multi-step workflows where an end-to-end example materially clarifies usage. For simple display components, let the agent use its templates.
+- **Do NOT include**:
+  - Layout instructions (let agent decide)
+  - Component Structure/Must Include sections (let agent decide)
+  - Specific component naming
 
 ### 6. Data Display Guidelines
 
-List the key data types and how to display their fields.
+List the key data types and their fields.
 
 - **Images**: **CRITICAL**. You MUST use this exact instruction for image fields:
   > **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
 - **Icons**: Do NOT instruct to use specific icons or emojis. The agent is authorized to use `lucide-react` at its discretion.
-- **Fields**: List **ALL** fields available in the type and how they should be rendered.
+- **Do NOT include**:
+  - Formatting instructions (e.g., "Display as stars", "Format as currency")
+  - Display instructions (e.g., "Display as mailto: link")
 
 ## Example Template
 
@@ -85,13 +90,6 @@ Get single item.
 - **Purpose**: List all items
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getItems()`
-
-### Components
-
-**Component**: `ItemCard`
-
-- **Purpose**: Preview of an item
-- **Props**: `{ item: Item }`
 
 ## Data Display Guidelines
 

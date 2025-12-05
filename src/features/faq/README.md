@@ -11,13 +11,13 @@ The FAQ (Frequently Asked Questions) feature manages groups of questions and ans
 
 ## Queries (Read Operations)
 
-### `getFAQGroups(): Promise<Faq[]>`
+### `getFAQSections(): Promise<Faq[]>`
 
 Get all FAQ groups, including their questions and answers.
 
 - **Returns**: `Promise<Faq[]>` - Array of Faq objects (groups)
 
-### `getFAQGroup(slug: string): Promise<Faq | null>`
+### `getFAQSection(slug: string): Promise<Faq | null>`
 
 Get a single FAQ group by its slug.
 
@@ -34,36 +34,24 @@ Get a single FAQ group by its slug.
 
 - **Purpose**: Display all FAQs, organized by group
 - **Placement**: Dedicated page OR section on Home/Contact/Support page.
-- **Data Source**: `getFAQGroups()`
-- **Layout**: Stack of sections, one for each group. Each section contains an accordion or list of questions.
+- **Data Source**: `getFAQSections()`
 
 **View**: Specific FAQ Section
 
 - **Purpose**: Display questions from a single group
-- **Placement**: Any relevant page (e.g., "Returns" FAQs on the Returns page).
-- **Data Source**: `getFAQGroup(slug)`
-
-### Components
-
-**Component**: `FaqAccordion`
-
-- **Purpose**: Display a list of questions and answers with expand/collapse functionality
-- **Props**: `{ items: FaqItem[] }`
-- **Structure**:
-  - List of items
-  - Click to expand answer
-  - Chevron icon rotation on expand
+- **Placement**: Any relevant page.
+- **Data Source**: `getFAQSection(slug)`
 
 ## Data Display Guidelines
 
-### FAQ Group (`Faq` type)
+### FAQ Group (`Faq`)
 
-- **`name`** (string): The group title (e.g., "Shipping", "Returns").
+- **`name`** (string): Group title.
 - **`items`** (array): List of Q&A pairs.
 - **`order`** (number): Sort order.
 - **`slug`** (string): URL slug.
 
 ### FAQ Item (`FaqItem`)
 
-- **`question`** (string): The question text.
-- **`answer`** (richText): The answer content. Use a Rich Text renderer.
+- **`question`** (string): Question text.
+- **`answer`** (richText): Answer content.

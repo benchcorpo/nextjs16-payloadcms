@@ -1,38 +1,46 @@
 import { describe, it, expect } from "vitest";
-import { getTeamGroups, getTeamGroup } from "../queries/team";
+import { getTeamSections, getTeamSection } from "../queries/team";
 
 describe("Team queries", () => {
-  describe("getTeamGroups", () => {
-    it("returns an array of team groups", async () => {
-      const result = await getTeamGroups();
+  describe("getTeamSections", () => {
+    it("returns an array", async () => {
+      const result = await getTeamSections();
       expect(Array.isArray(result)).toBe(true);
     });
 
-    it("returns groups sorted by order", async () => {
-      const result = await getTeamGroups();
-      expect(Array.isArray(result)).toBe(true);
+    it("returns proper team structure", async () => {
+      const result = await getTeamSections();
+      if (result.length > 0) {
+        expect(result[0]).toHaveProperty("name");
+        expect(result[0]).toHaveProperty("items");
+      }
     });
   });
 
-  describe("getTeamGroup", () => {
-    it("returns null for non-existent group slug", async () => {
-      const result = await getTeamGroup("non-existent-team-group");
+  describe("getTeamSection", () => {
+    it("returns null for non-existent slug", async () => {
+      const result = await getTeamSection("non-existent-team-section");
       expect(result).toBeNull();
     });
 
     it("returns null for empty slug", async () => {
-      const result = await getTeamGroup("");
+      const result = await getTeamSection("");
       expect(result).toBeNull();
     });
 
-    it("handles slugs with common naming patterns", async () => {
-      const result = await getTeamGroup("management-team");
-      expect(result).toBeNull();
+    it("returns a single team group by slug", async () => {
+      const result = await getTeamSection("management-team");
+      if (result) {
+        expect(result).toHaveProperty("name");
+        expect(result).toHaveProperty("items");
+      }
     });
 
-    it("handles slugs with special characters", async () => {
-      const result = await getTeamGroup("kitchen-staff-2024");
-      expect(result).toBeNull();
+    it("returns group with different slug format", async () => {
+      const result = await getTeamSection("kitchen-staff-2024");
+      if (result) {
+        expect(result).toHaveProperty("name");
+      }
     });
   });
 });

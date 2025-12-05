@@ -7,8 +7,6 @@ The Contact feature manages the business's contact information, social media lin
 ## Types
 
 - **`Contact`**: Global contact information (email, phone, address).
-- **`ContactFormData`**: Input data for contact form submissions.
-- **`ContactFormState`**: Return state from contact form action.
 
 ## Queries (Read Operations)
 
@@ -53,44 +51,13 @@ Creates a Server Action for contact form submissions compatible with `useActionS
 - **Purpose**: Display contact information and a contact form
 - **Placement**: Dedicated page.
 - **Data Source**:
-  - `getContact()` (for contact info, address, phone, email)
+  - `getContact()` (for contact info)
   - `createContactFormAction` mutation (for form submission)
-- **Layout**: Two-column layout (contact info + form)
-
-### Components
-
-**Component**: `ContactForm`
-
-- **Purpose**: Contact form with validation and submission handling
-- **Props**: None (can optionally accept settings for pre-filling)
-- **Must Include**:
-  - Name field (text input)
-  - Email field (email input)
-  - Phone field (optional text input)
-  - Subject field (text input)
-  - Message field (textarea)
-  - Submit button
-  - Loading state during submission (via `isPending`)
-  - Success message after submission
-  - Error display for validation failures
-- **Special Notes**:
-  - Must use `"use client"` directive (form interactivity required)
-  - Import and use `contactFormSchema` for validation if needed
-  - Create server action file with custom email template
 
 ## Data Display Guidelines
 
 ### Contact Info (`Contact`)
 
-- **`email`** (email): Display as `mailto:` link.
-- **`phone`** (text): Display as `tel:` link.
-- **`address`** (textarea): Display with line breaks preserved.
-
-### Contact Email (`ContactEmail`) - _For Admin/Internal Use_
-
-- **`name`** (string): Sender's name.
-- **`email`** (email): Sender's email.
-- **`phone`** (text): Sender's phone.
-- **`subject`** (text): Message subject.
-- **`message`** (textarea): Message content.
-- **`submittedAt`** (date): Submission timestamp.
+- **`email`** (email): Contact email.
+- **`phone`** (text): Contact phone.
+- **`address`** (textarea): Physical address.

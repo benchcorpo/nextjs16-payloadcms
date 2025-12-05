@@ -9,7 +9,7 @@ import type { RestaurantMenu } from "../types";
 /**
  * Get all menu categories with their dishes
  */
-export async function getMenuCategories(): Promise<RestaurantMenu[]> {
+export async function getMenuSections(): Promise<RestaurantMenu[]> {
   const payload = await getPayload({ config: configPromise });
 
   const { docs } = await payload.find({
@@ -24,7 +24,7 @@ export async function getMenuCategories(): Promise<RestaurantMenu[]> {
 /**
  * Get a single menu category by slug
  */
-export async function getMenuCategory(
+export async function getMenuSection(
   slug: string,
 ): Promise<RestaurantMenu | null> {
   const payload = await getPayload({ config: configPromise });

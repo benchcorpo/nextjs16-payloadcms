@@ -17,20 +17,32 @@ export async function seedTestimonials(payload: Payload) {
     "Testimonial Author Placeholder",
   );
 
+  let createdCount = 0;
   for (let i = 0; i < 12; i++) {
-    await payload.create({
+    const client = faker.person.fullName();
+
+    const existing = await payload.find({
       collection: "testimonials",
-      data: {
-        client: faker.person.fullName(),
-        company: faker.helpers.maybe(() => faker.company.name()),
-        quote: faker.lorem.paragraph(),
-        photo: authorImage?.id,
-        rating: faker.number.int({ min: 4, max: 5 }),
-        date: faker.date.past({ years: 2 }).toISOString(),
-      },
+      where: { client: { equals: client } },
+      limit: 1,
     });
+
+    if (existing.docs.length === 0) {
+      await payload.create({
+        collection: "testimonials",
+        data: {
+          client,
+          company: faker.helpers.maybe(() => faker.company.name()),
+          quote: faker.lorem.paragraph(),
+          photo: authorImage?.id,
+          rating: faker.number.int({ min: 4, max: 5 }),
+          date: faker.date.past({ years: 2 }).toISOString(),
+        },
+      });
+      createdCount++;
+    }
   }
 
-  console.log("  ✓ Created 12 testimonials");
+  console.log(`  ✓ Created ${createdCount} testimonials`);
   console.log("✅ Testimonials seeded");
 }

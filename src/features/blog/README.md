@@ -62,34 +62,24 @@ Get blog posts for a specific category.
 - **Purpose**: List recent blog posts
 - **Placement**: Dedicated page OR section on Home page.
 - **Data Source**: `getBlogPosts()`
-- **Layout**: Grid of post cards. Optional sidebar with categories.
 
 **View**: Blog Detail
 
 - **Purpose**: Display full blog post
 - **Placement**: Dedicated page.
 - **Data Source**: `getBlogPost(slug)`
-- **Layout**: Article layout with header image, title, author info, and rich text content.
 
 **View**: Category List
 
 - **Purpose**: List posts in a specific category
 - **Placement**: Dedicated page.
-- **Data Source**: `getBlogPostsByCategory(slug)` (or `getBlogPosts` with category filter)
+- **Data Source**: `getBlogPostsByCategory(slug)` or `getBlogPosts({ category })`
 
 **View**: Author List
 
 - **Purpose**: List posts by a specific author
 - **Placement**: Dedicated page.
-- **Data Source**: `getBlogPostsByAuthor(slug)` (or `getBlogPosts` with author filter)
-
-### Components
-
-**Component**: `BlogCard`
-
-- **Purpose**: Preview of a blog post
-- **Props**: `{ post: BlogPost }`
-- **Must Include**: Image, Title, Excerpt, Date, Author, Category.
+- **Data Source**: `getBlogPostsByAuthor(slug)` or `getBlogPosts({ author })`
 
 ## Data Display Guidelines
 
@@ -99,18 +89,18 @@ Get blog posts for a specific category.
 - **`featuredImage`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
 - **`excerpt`** (textarea): Short summary.
 - **`content`** (richText): Article body.
-- **`publishedDate`** (date): Format nicely.
-- **`author`** (relationship): Display author name and photo.
-- **`category`** (relationship): Display category name.
+- **`publishedDate`** (date): Publication date.
+- **`author`** (relationship): Author reference.
+- **`category`** (relationship): Category reference.
 - **`tags`** (array): List of tags. Each item has a `tag` field (string).
-- **`metaTitle`** (text): SEO title (optional display).
-- **`metaDescription`** (textarea): SEO description (optional display).
+- **`metaTitle`** (text): SEO title.
+- **`metaDescription`** (textarea): SEO description.
 - **`slug`** (string): URL slug.
 
 ### Blog Author (`BlogAuthor`)
 
 - **`name`** (string): Author name.
-- **`photo`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
+- **`icon`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
 
 ### Blog Category (`BlogCategory`)
 
