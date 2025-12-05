@@ -59,7 +59,20 @@ export function createContactFormAction(
 
       const payload = await getPayload({ config: configPromise });
 
-      // 1. Save to database
+      // 1. Fetch contact global to get recipient email
+      const contactGlobal = await payload.findGlobal({
+        slug: "contact",
+      });
+
+      const recipientEmail = contactGlobal.info?.email;
+
+      if (!recipientEmail) {
+        throw new Error(
+          "Contact email not configured. Please set the email in the Contact global settings.",
+        );
+      }
+
+      // 2. Save to database
       const doc = await payload.create({
         collection: "contact-emails",
         data: {
@@ -71,9 +84,9 @@ export function createContactFormAction(
         },
       });
 
-      // 2. Send email with generated HTML
+      // 3. Send email with generated HTML
       await payload.sendEmail({
-        to: process.env.CONTACT_EMAIL || "admin@example.com",
+        to: recipientEmail,
         subject: `New Contact: ${validatedData.subject}`,
         html: emailHtml,
       });
