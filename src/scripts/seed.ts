@@ -2,7 +2,7 @@ import "dotenv/config";
 import { getPayload } from "payload";
 import configPromise from "@/src/payload.config";
 
-import { seeds } from "@/src/features";
+import { seeds } from "@/src/features/config";
 
 async function seed() {
   console.log("🌱 Starting database seed...\n");
