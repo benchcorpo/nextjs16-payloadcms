@@ -29,12 +29,18 @@ export const contactFormSchema = z.object({
 export type ContactFormData = z.infer<typeof contactFormSchema>;
 
 /**
- * State type for useActionState - discriminated union
+ * State type for useActionState
+ * 
+ * - success: true when form submitted successfully
+ * - success: false when validation or server errors occur
+ * - error: form-level error message
+ * - fieldErrors: validation errors per field
  */
-export type ContactFormState =
-  | { success: true; id: string | number }
-  | { success: false; error: string; fieldErrors?: Record<string, string[]> }
-  | Record<string, never>; // Initial empty state
+export type ContactFormState = {
+  success: boolean;
+  error?: string;
+  fieldErrors?: Record<string, string[]>;
+};
 
 /**
  * Function type for generating email HTML templates

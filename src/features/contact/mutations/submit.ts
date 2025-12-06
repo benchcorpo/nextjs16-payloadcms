@@ -62,7 +62,7 @@ export async function submitContactForm(
       html: emailHtml,
     });
 
-    return { success: true, id: doc.id };
+    return { success: true };
   } catch (error) {
     console.error("Failed to submit contact email:", error);
     return {

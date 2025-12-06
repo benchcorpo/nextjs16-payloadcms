@@ -49,25 +49,10 @@ Creates a Server Action for contact form submissions compatible with `useActionS
 - **Email Configuration**: Contact form submissions are sent to the email configured in the Contact global (`email` field). This field must be set in the admin panel for contact form submissions to work.
 
 - **Returns**: Server Action compatible with `useActionState`
-  - Returns `ContactFormState` (discriminated union):
-    - Success: `{ success: true; id: string | number }`
-    - Error: `{ success: false; error: string; fieldErrors?: Record<string, string[]> }`
-    - Initial: `{}`
-
-**Example:**
-```typescript
-const action = createContactFormAction((data) => {
-  return `
-    <h2>New message from ${data.name}</h2>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Subject:</strong> ${data.subject}</p>
-    <p>${data.message}</p>
-  `;
-});
-
-// Use with useActionState in a form component
-const [state, formAction] = useActionState(action, {});
-```
+  - Returns `ContactFormState`:
+    - `success: boolean` - True if submitted successfully, false if validation or server errors
+    - `error?: string` - Error message on failure
+    - `fieldErrors?: Record<string, string[]>` - Per-field validation errors
 
 ## UI Components to Create
 
