@@ -1,5 +1,6 @@
 import { CollectionConfig, GlobalConfig, Payload } from "payload";
 import { faqConfig } from "./faq/config";
+import { newsConfig } from "./news/config";
 import { blogConfig } from "./blog/config";
 import { teamConfig } from "./team/config";
 import { eventsConfig } from "./events/config";
@@ -22,6 +23,7 @@ export type Feature = {
 
 const features: Feature[] = [
   faqConfig,
+  newsConfig,
   blogConfig,
   teamConfig,
   eventsConfig,
