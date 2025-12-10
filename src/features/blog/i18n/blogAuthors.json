@@ -28,9 +28,9 @@
       "en": "Description",
       "fr": "Description"
     },
-    "icon": {
-      "en": "Icon",
-      "fr": "Icône"
+    "photo": {
+      "en": "Photo",
+      "fr": "Photo"
     },
     "slug": {
       "en": "Slug",

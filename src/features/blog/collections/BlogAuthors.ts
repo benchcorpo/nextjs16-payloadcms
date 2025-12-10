@@ -35,9 +35,9 @@ export const BlogAuthors: CollectionConfig = {
               label: i18n.fields.description,
             },
             {
-              name: "icon",
+              name: "photo",
               type: "upload",
-              label: i18n.fields.icon,
+              label: i18n.fields.photo,
               relationTo: "media",
             },
           ],

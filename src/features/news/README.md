@@ -6,7 +6,7 @@ The News feature manages company news and announcements. It allows displaying a 
 
 ## Types
 
-- **`NewsItem`**: News item with title, content, featured image, and published date.
+- **`NewsItem`**: News item with title, content, image, and published date.
 
 ## Queries (Read Operations)
 
@@ -48,6 +48,6 @@ Get a single news item by slug.
 
 - **`title`** (string): News headline.
 - **`content`** (richText): Full news content.
-- **`featuredImage`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
+- **`image`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
 - **`publishedDate`** (date): Publication date.
 - **`slug`** (string): URL slug.

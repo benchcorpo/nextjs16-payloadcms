@@ -37,9 +37,9 @@ export const BlogPosts: CollectionConfig = {
               required: true,
             },
             {
-              name: "featuredImage",
+              name: "image",
               type: "upload",
-              label: i18n.fields.featuredImage,
+              label: i18n.fields.image,
               relationTo: "media",
             },
             {

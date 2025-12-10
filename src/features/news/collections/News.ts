@@ -36,10 +36,10 @@ export const News: CollectionConfig = {
               required: true,
             },
             {
-              name: "featuredImage",
+              name: "image",
               type: "upload",
               relationTo: "media",
-              label: i18n.fields.featuredImage,
+              label: i18n.fields.image,
             },
           ],
         },

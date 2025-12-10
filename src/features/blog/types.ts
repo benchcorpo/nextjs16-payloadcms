@@ -8,7 +8,7 @@ export interface BlogCategory {
   id: number;
   name: string;
   description?: string;
-  icon?: Media;
+  image?: Media;
   slug: string;
   order: number;
 }
@@ -17,7 +17,7 @@ export interface BlogAuthor {
   id: number;
   name: string;
   description?: string;
-  icon?: Media;
+  photo?: Media;
   slug: string;
   order: number;
 }
@@ -31,7 +31,7 @@ export interface BlogPost {
   id: number;
   category: BlogCategory;
   title: string;
-  featuredImage?: Media;
+  image?: Media;
   excerpt?: string;
   content: RichText;
   author: BlogAuthor;

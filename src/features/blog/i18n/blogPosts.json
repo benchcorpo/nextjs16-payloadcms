@@ -32,9 +32,9 @@
       "en": "Title",
       "fr": "Titre"
     },
-    "featuredImage": {
-      "en": "Featured Image",
-      "fr": "Image à la une"
+    "image": {
+      "en": "Image",
+      "fr": "Image"
     },
     "excerpt": {
       "en": "Excerpt",

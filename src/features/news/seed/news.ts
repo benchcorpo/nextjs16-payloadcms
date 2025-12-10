@@ -40,7 +40,7 @@ export async function seedNews(payload: Payload) {
             faker.lorem.paragraphs(3, "\n\n"),
           ),
           publishedDate: faker.date.past({ years: 1 }).toISOString(),
-          featuredImage: newsImage?.id,
+          image: newsImage?.id,
         },
       });
       createdNews++;

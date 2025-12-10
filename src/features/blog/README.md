@@ -6,9 +6,9 @@ The Blog feature manages blog posts, categories, and authors. It allows displayi
 
 ## Types
 
-- **`BlogPost`**: Blog post with title, featured image, excerpt, content, author, category, and tags.
-- **`BlogAuthor`**: Blog author with name, bio, and icon.
-- **`BlogCategory`**: Blog category with name, description, and icon.
+- **`BlogPost`**: Blog post with title, image, excerpt, content, author, category, and tags.
+- **`BlogAuthor`**: Blog author with name, bio, and photo.
+- **`BlogCategory`**: Blog category with name, description, and image.
 - **`BlogTag`**: Tag for blog posts.
 
 ## Queries (Read Operations)
@@ -86,7 +86,7 @@ Get blog posts for a specific category.
 ### Blog Post (`BlogPost`)
 
 - **`title`** (string): Main heading.
-- **`featuredImage`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
+- **`image`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
 - **`excerpt`** (textarea): Short summary.
 - **`content`** (richText): Article body.
 - **`publishedDate`** (date): Publication date.
@@ -100,8 +100,9 @@ Get blog posts for a specific category.
 ### Blog Author (`BlogAuthor`)
 
 - **`name`** (string): Author name.
-- **`icon`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
+- **`photo`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.
 
 ### Blog Category (`BlogCategory`)
 
 - **`name`** (string): Category name.
+- **`image`** (upload/Media): **CRITICAL**. MUST be displayed using Next.js `<Image>`. Check for existence and use `url`.

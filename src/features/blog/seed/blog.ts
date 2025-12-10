@@ -18,7 +18,7 @@ export async function seedBlog(payload: Payload) {
     "blog-category-placeholder.png",
     "Blog Category Placeholder",
   );
-  const authorImage = await seedAsset(
+  const authorPhoto = await seedAsset(
     payload,
     __dirname,
     "blog-author-placeholder.png",
@@ -51,7 +51,7 @@ export async function seedBlog(payload: Payload) {
           description: faker.lorem.sentence(),
           slug,
           order: i,
-          icon: categoryImage?.id,
+          image: categoryImage?.id,
         },
       });
       categories.push(category);
@@ -81,7 +81,7 @@ export async function seedBlog(payload: Payload) {
           description: faker.person.bio(),
           slug,
           order: i,
-          icon: authorImage?.id,
+          photo: authorPhoto?.id,
         },
       });
       authors.push(author);
@@ -116,7 +116,7 @@ export async function seedBlog(payload: Payload) {
           publishedDate: faker.date.past().toISOString(),
           author: faker.helpers.arrayElement(authors).id,
           category: faker.helpers.arrayElement(categories).id,
-          featuredImage: postImage?.id,
+          image: postImage?.id,
           tags: faker.helpers.maybe(() =>
             Array.from(
               { length: faker.number.int({ min: 1, max: 3 }) },

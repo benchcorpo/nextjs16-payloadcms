@@ -8,7 +8,7 @@ export interface NewsItem {
   id: number;
   title: string;
   content: RichText;
-  featuredImage?: Media;
+  image?: Media;
   publishedDate: string;
   slug: string;
 }
