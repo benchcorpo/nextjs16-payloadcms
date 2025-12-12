@@ -2,6 +2,7 @@
 
 import { Command } from "commander";
 import { initCommand } from "./commands/init.js";
+import { seedCommand } from "./commands/seed.js";
 
 /**
  * BenchCMS CLI - Management script for BenchCMS operations
@@ -21,6 +22,19 @@ program
   .action(async () => {
     try {
       await initCommand.execute([]);
+    } catch (error) {
+      console.error("Error:", error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
+
+// Register the seed command
+program
+  .command("db:seed [context]")
+  .description(seedCommand.description)
+  .action(async (context) => {
+    try {
+      await seedCommand.execute(context ? [context] : []);
     } catch (error) {
       console.error("Error:", error instanceof Error ? error.message : error);
       process.exit(1);
